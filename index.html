@@ -203,7 +203,7 @@
             box-shadow: 0 2px 12px rgba(230, 57, 70, 0.3);
         }
 
-        /* ===== LANGUAGE SELECTOR ===== */
+        /* ===== LANGUAGE SELECTOR - DESKTOP ===== */
         .lang-selector {
             position: relative;
             display: inline-flex;
@@ -287,6 +287,14 @@
             background: rgba(230, 57, 70, 0.05);
         }
 
+        /* ===== RIGHT SIDE GROUP (Language + Hamburger) ===== */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
         .hamburger {
             display: none;
             font-size: 1.4rem;
@@ -296,6 +304,60 @@
             border: none;
             padding: 4px;
             flex-shrink: 0;
+        }
+
+        /* Mobile language selector (inside hamburger menu) */
+        .mobile-lang-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px 0;
+            border-bottom: 1px solid #1e1e1e;
+            margin-bottom: 4px;
+        }
+        .mobile-lang-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+        .mobile-lang-header i {
+            color: var(--primary-red);
+            font-size: 1rem;
+        }
+        .mobile-lang-header .arrow {
+            margin-left: auto;
+            font-size: 0.6rem;
+            transition: transform 0.3s;
+        }
+        .mobile-lang-header.active .arrow {
+            transform: rotate(180deg);
+        }
+        .mobile-lang-options {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            padding-left: 30px;
+        }
+        .mobile-lang-options.open {
+            display: flex;
+        }
+        .mobile-lang-options a {
+            font-size: 0.85rem;
+            padding: 6px 0;
+            border-bottom: none;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        .mobile-lang-options a:hover {
+            color: var(--primary-red);
+        }
+        .mobile-lang-options a.active-lang {
+            color: var(--primary-red);
         }
 
         /* ===== MOBILE NAV ===== */
@@ -312,7 +374,7 @@
             border-left: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
             box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
         }
         .mobile-nav.active {
@@ -420,7 +482,7 @@
             font-size: 0.8rem;
         }
 
-        /* Hero Image - ENHANCED & STRETCHED */
+        /* Hero Image - PROPERLY SIZED */
         .hero-image-wrapper {
             display: flex;
             justify-content: center;
@@ -430,15 +492,15 @@
         }
         .hero-image-wrapper img {
             width: 100%;
-            max-width: 560px;
+            max-width: 500px;
             height: auto;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 20px 60px rgba(230, 57, 70, 0.12), 0 0 80px rgba(230, 57, 70, 0.04);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            object-fit: cover;
-            aspect-ratio: 16/10;
+            object-fit: contain;
             display: block;
+            background: #0a0a0a;
         }
         .hero-image-wrapper img:hover {
             transform: scale(1.02);
@@ -446,9 +508,9 @@
         }
         .hero-image-wrapper .glow-red-bg {
             position: absolute;
-            width: 80%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(230, 57, 70, 0.10), transparent 70%);
+            width: 70%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.08), transparent 70%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -1041,8 +1103,7 @@
                 font-size: 2.2rem;
             }
             .hero-image-wrapper img {
-                max-width: 440px;
-                aspect-ratio: 16/10;
+                max-width: 420px;
             }
             .pricing-card {
                 padding: 16px 12px;
@@ -1073,9 +1134,8 @@
                 order: -1;
             }
             .hero-image-wrapper img {
-                max-width: 520px;
+                max-width: 480px;
                 width: 100%;
-                aspect-ratio: 16/10;
             }
             .pricing-scroll {
                 grid-template-columns: repeat(3, 1fr);
@@ -1105,20 +1165,11 @@
             .hamburger {
                 display: block;
             }
-            /* Show language selector in mobile nav */
-            .mobile-lang-selector {
-                display: flex !important;
+            /* Language selector stays in nav-right */
+            .nav-right {
+                display: flex;
                 align-items: center;
-                gap: 8px;
-                padding: 10px 0;
-                border-bottom: 1px solid #1e1e1e;
-                color: var(--text-muted);
-                font-size: 0.9rem;
-                font-weight: 500;
-                cursor: pointer;
-            }
-            .mobile-lang-selector i {
-                color: var(--primary-red);
+                gap: 6px;
             }
 
             .hero-content h1 {
@@ -1147,7 +1198,6 @@
             }
             .hero-image-wrapper img {
                 max-width: 100%;
-                aspect-ratio: 16/10;
                 border-radius: 16px;
             }
 
@@ -1323,7 +1373,6 @@
                 font-size: 0.6rem;
             }
             .hero-image-wrapper img {
-                aspect-ratio: 16/10;
                 border-radius: 12px;
             }
 
@@ -1506,18 +1555,22 @@
         <a href="#how-it-works">⚙️ HOW IT WORKS</a>
         <a href="#faq">❓ FAQ</a>
         <a href="#contact">📧 CONTACT</a>
+
         <!-- Mobile Language Selector -->
-        <div class="mobile-lang-selector" id="mobileLangSelector">
-            <i class="fas fa-globe"></i>
-            <span id="mobileCurrentLang">English</span>
-            <span style="margin-left:auto;color:#666;">▼</span>
+        <div class="mobile-lang-section">
+            <div class="mobile-lang-header" id="mobileLangHeader">
+                <i class="fas fa-globe"></i>
+                <span id="mobileLangLabel">English</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="mobile-lang-options" id="mobileLangOptions">
+                <a href="#" data-lang="en" class="active-lang">🇬🇧 English</a>
+                <a href="#" data-lang="fr">🇫🇷 Français</a>
+                <a href="#" data-lang="es">🇪🇸 Español</a>
+                <a href="#" data-lang="pt">🇵🇹 Português</a>
+            </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:6px;padding-left:8px;margin-top:-4px;" id="mobileLangOptions">
-            <a href="#" data-lang="en" class="active-lang" style="font-size:0.85rem;border:none;padding:4px 0;">🇬🇧 English</a>
-            <a href="#" data-lang="fr" style="font-size:0.85rem;border:none;padding:4px 0;">🇫🇷 Français</a>
-            <a href="#" data-lang="es" style="font-size:0.85rem;border:none;padding:4px 0;">🇪🇸 Español</a>
-            <a href="#" data-lang="pt" style="font-size:0.85rem;border:none;padding:4px 0;">🇵🇹 Português</a>
-        </div>
+
         <a href="#" class="btn-primary subscribe-trigger" style="text-align:center;margin-top:8px;width:100%;">SUBSCRIBE NOW</a>
     </nav>
 
@@ -1535,8 +1588,11 @@
                 <li><a href="#how-it-works">HOW</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">CONTACT</a></li>
-                <!-- Language Selector -->
-                <li class="lang-selector" id="langSelector">
+                <li><a href="#" class="btn-primary subscribe-trigger">SUBSCRIBE</a></li>
+            </ul>
+            <div class="nav-right">
+                <!-- Language Selector - Desktop -->
+                <div class="lang-selector" id="langSelector">
                     <i class="fas fa-globe"></i>
                     <span id="currentLangLabel">EN</span>
                     <span class="arrow">▼</span>
@@ -1554,10 +1610,9 @@
                             <span class="flag">🇵🇹</span> Português
                         </a>
                     </div>
-                </li>
-                <li><a href="#" class="btn-primary subscribe-trigger">SUBSCRIBE</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+                </div>
+                <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+            </div>
         </div>
     </header>
 
@@ -1897,12 +1952,11 @@
             const langOptions = langDropdown.querySelectorAll('a');
 
             // ---- Mobile Language Selector ----
-            const mobileLangSelector = document.getElementById('mobileLangSelector');
+            const mobileLangHeader = document.getElementById('mobileLangHeader');
             const mobileLangOptions = document.getElementById('mobileLangOptions');
-            const mobileCurrentLang = document.getElementById('mobileCurrentLang');
+            const mobileLangLabel = document.getElementById('mobileLangLabel');
             const mobileLangLinks = mobileLangOptions.querySelectorAll('a');
 
-            // Language names mapping
             const langNames = {
                 en: 'English',
                 fr: 'Français',
@@ -1910,50 +1964,45 @@
                 pt: 'Português'
             };
 
-            // Function to update language UI
             function setLanguage(lang, optionElement) {
                 const label = langNames[lang] || lang.toUpperCase();
-                const flag = optionElement ? optionElement.querySelector('.flag')?.textContent || '🌐' : '🌐';
 
                 // Update desktop
                 currentLangLabel.textContent = lang.toUpperCase();
                 langOptions.forEach(opt => opt.classList.remove('active-lang'));
-                if (optionElement) {
-                    const desktopOption = Array.from(langOptions).find(
-                        opt => opt.getAttribute('data-lang') === lang
-                    );
-                    if (desktopOption) desktopOption.classList.add('active-lang');
-                }
+                const desktopOption = Array.from(langOptions).find(opt => opt.getAttribute('data-lang') === lang);
+                if (desktopOption) desktopOption.classList.add('active-lang');
 
                 // Update mobile
-                mobileCurrentLang.textContent = label;
+                mobileLangLabel.textContent = label;
                 mobileLangLinks.forEach(link => {
-                    link.style.color = link.getAttribute('data-lang') === lang ? '#e63946' : '';
-                    link.style.fontWeight = link.getAttribute('data-lang') === lang ? '600' : '400';
+                    link.classList.remove('active-lang');
+                    if (link.getAttribute('data-lang') === lang) {
+                        link.classList.add('active-lang');
+                    }
                 });
 
                 // Close dropdowns
                 langSelector.classList.remove('active');
                 langDropdown.classList.remove('open');
-                mobileLangOptions.style.display = 'none';
+                mobileLangOptions.classList.remove('open');
 
-                // Notification
                 showNotification('🌐 Language changed to ' + label);
                 console.log('Language changed to:', lang);
             }
 
-            // Toggle desktop dropdown
+            // Desktop toggle
             langSelector.addEventListener('click', function(e) {
                 e.stopPropagation();
                 this.classList.toggle('active');
                 langDropdown.classList.toggle('open');
             });
 
-            // Toggle mobile language options
-            mobileLangSelector.addEventListener('click', function(e) {
+            // Mobile toggle
+            mobileLangHeader.addEventListener('click', function(e) {
                 e.stopPropagation();
-                const isVisible = mobileLangOptions.style.display !== 'none';
-                mobileLangOptions.style.display = isVisible ? 'none' : 'flex';
+                this.classList.toggle('active');
+                mobileLangOptions.classList.toggle('open');
             });
 
             // Desktop language selection
@@ -1972,12 +2021,9 @@
                     e.preventDefault();
                     e.stopPropagation();
                     const lang = this.getAttribute('data-lang');
-                    // Find the corresponding desktop option for flag
-                    const desktopOption = Array.from(langOptions).find(
-                        opt => opt.getAttribute('data-lang') === lang
-                    );
-                    setLanguage(lang, desktopOption || this);
-                    mobileLangOptions.style.display = 'none';
+                    setLanguage(lang, this);
+                    mobileLangOptions.classList.remove('open');
+                    mobileLangHeader.classList.remove('active');
                 });
             });
 
@@ -1987,12 +2033,12 @@
                     langSelector.classList.remove('active');
                     langDropdown.classList.remove('open');
                 }
-                if (!e.target.closest('.mobile-lang-selector') && !e.target.closest('#mobileLangOptions')) {
-                    mobileLangOptions.style.display = 'none';
+                if (!e.target.closest('.mobile-lang-section')) {
+                    mobileLangOptions.classList.remove('open');
+                    mobileLangHeader.classList.remove('active');
                 }
             });
 
-            // Notification helper
             function showNotification(message) {
                 const notification = document.createElement('div');
                 notification.style.cssText = `
@@ -2019,26 +2065,22 @@
                     `;
             document.head.appendChild(styleSheet);
 
-            // Set initial mobile state
-            mobileLangOptions.style.display = 'none';
-
-            // ---- Subscription popup with plan detection ----
+            // ---- Subscription popup ----
             const subscribeTriggers = document.querySelectorAll('.subscribe-trigger');
 
             function openPopup(e) {
                 e.preventDefault();
                 const trigger = e.currentTarget;
                 const plan = trigger.getAttribute('data-plan') || 'Subscription Plan';
-                const planText = plan;
 
-                planNameDisplay.textContent = planText;
-                popupPlanTitle.textContent = 'Subscribe to ' + planText;
-                popupPlanDesc.innerHTML = 'To complete your subscription for <strong>' + planText +
+                planNameDisplay.textContent = plan;
+                popupPlanTitle.textContent = 'Subscribe to ' + plan;
+                popupPlanDesc.innerHTML = 'To complete your subscription for <strong>' + plan +
                     '</strong>, please reach out to our support team via WhatsApp. They will guide you through the process.';
 
                 const waNumber = '15814659038';
                 const waMessage = encodeURIComponent(
-                    'Hello! I would like to subscribe to the ' + planText +
+                    'Hello! I would like to subscribe to the ' + plan +
                     ' plan for Aviator Predictor. Please assist me with the subscription process.'
                 );
                 whatsappLink.href = 'https://wa.me/' + waNumber + '?text=' + waMessage;
@@ -2082,7 +2124,7 @@
             hamburger.addEventListener('click', openMobile);
             closeMobile.addEventListener('click', closeMobileNav);
             overlay.addEventListener('click', closeMobileNav);
-            document.querySelectorAll('.mobile-nav a:not(.mobile-lang-selector)').forEach(link => {
+            document.querySelectorAll('.mobile-nav a:not(.mobile-lang-header)').forEach(link => {
                 if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
                     link.addEventListener('click', closeMobileNav);
                 }
@@ -2121,7 +2163,7 @@
 
             // ---- Active nav link ----
             const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-links a:not(.btn-primary):not(.lang-selector)');
+            const navLinks = document.querySelectorAll('.nav-links a:not(.btn-primary)');
             window.addEventListener('scroll', function() {
                 let current = '';
                 sections.forEach(section => {
@@ -2148,10 +2190,9 @@
                 });
             });
 
-            console.log('🚀 Aviator Predictor — premium page with visible language selector and stretched image.');
-            console.log('📸 Hero image: https://i.postimg.cc/34gRkGKt/Whats-App-Image-2026-08-08-at-03-42-30.jpg');
-            console.log('💰 Updated prices: $19.00 | $49.00 | $99.00');
-            console.log('🌐 Language selector visible in both desktop and mobile nav.');
+            console.log('✅ Aviator Predictor — fully fixed with visible language selector and proper image sizing.');
+            console.log('🌐 Language selector is now near the hamburger menu on mobile.');
+            console.log('📸 Hero image properly sized and visible.');
         })();
     </script>
 </body>
