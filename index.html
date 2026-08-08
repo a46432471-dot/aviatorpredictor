@@ -22,8 +22,14 @@
         }
 
         /* ===== RESET & BASE ===== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background: var(--dark-bg);
             color: var(--white);
@@ -32,9 +38,18 @@
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
-        a { color: var(--white); text-decoration: none; }
-        ul { list-style: none; }
-        .container { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+        a {
+            color: var(--white);
+            text-decoration: none;
+        }
+        ul {
+            list-style: none;
+        }
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
         .section-title {
             font-size: 2rem;
             font-weight: 800;
@@ -43,7 +58,9 @@
             letter-spacing: -0.5px;
             position: relative;
         }
-        .section-title span { color: var(--primary-red); }
+        .section-title span {
+            color: var(--primary-red);
+        }
         .section-title::after {
             content: '';
             display: block;
@@ -85,12 +102,16 @@
             opacity: 0;
             transition: opacity 0.4s;
         }
-        .btn-primary:hover::after { opacity: 0.08; }
+        .btn-primary:hover::after {
+            opacity: 0.08;
+        }
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 8px 30px rgba(230, 57, 70, 0.55);
         }
-        .btn-primary:active { transform: scale(0.96); }
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
 
         .btn-secondary {
             display: inline-flex;
@@ -102,7 +123,7 @@
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.9rem;
-            border: 2px solid rgba(255,255,255,0.25);
+            border: 2px solid rgba(255, 255, 255, 0.25);
             transition: all var(--transition);
             text-align: center;
             white-space: nowrap;
@@ -112,9 +133,11 @@
             border-color: var(--primary-red);
             color: var(--primary-red);
             transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(230,57,70,0.15);
+            box-shadow: 0 0 30px rgba(230, 57, 70, 0.15);
         }
-        .btn-secondary:active { transform: scale(0.96); }
+        .btn-secondary:active {
+            transform: scale(0.96);
+        }
 
         /* ===== HEADER ===== */
         header {
@@ -123,7 +146,7 @@
             z-index: 1000;
             background: rgba(8, 8, 8, 0.95);
             backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .navbar {
             display: flex;
@@ -144,9 +167,11 @@
         .logo i {
             color: var(--primary-red);
             font-size: 1.4rem;
-            filter: drop-shadow(0 0 12px rgba(230,57,70,0.2));
+            filter: drop-shadow(0 0 12px rgba(230, 57, 70, 0.2));
         }
-        .logo span { color: var(--primary-red); }
+        .logo span {
+            color: var(--primary-red);
+        }
         .nav-links {
             display: flex;
             gap: 12px;
@@ -156,7 +181,9 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
-        .nav-links::-webkit-scrollbar { display: none; }
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
         .nav-links a {
             font-size: 0.7rem;
             font-weight: 500;
@@ -165,13 +192,97 @@
             padding: 4px 6px;
             letter-spacing: 0.3px;
         }
-        .nav-links a:hover { color: var(--primary-red); }
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
         .nav-links .btn-primary {
             padding: 6px 14px;
             font-size: 0.7rem;
             min-height: 32px;
-            box-shadow: 0 2px 12px rgba(230,57,70,0.3);
+            box-shadow: 0 2px 12px rgba(230, 57, 70, 0.3);
         }
+
+        /* ===== LANGUAGE SELECTOR ===== */
+        .lang-selector {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 30px;
+            transition: background var(--transition);
+            gap: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .lang-selector:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #333;
+            color: var(--white);
+        }
+        .lang-selector i {
+            font-size: 0.8rem;
+        }
+        .lang-selector .arrow {
+            font-size: 0.5rem;
+            transition: transform 0.3s;
+            margin-left: 2px;
+        }
+        .lang-selector.active .arrow {
+            transform: rotate(180deg);
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 6px 0;
+            min-width: 140px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-8px) scale(0.96);
+            transition: all 0.25s ease;
+            z-index: 100;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        .lang-dropdown.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+        .lang-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .lang-dropdown a:hover {
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--white);
+        }
+        .lang-dropdown a .flag {
+            font-size: 1rem;
+        }
+        .lang-dropdown a.active-lang {
+            color: var(--primary-red);
+            background: rgba(230, 57, 70, 0.05);
+        }
+
         .hamburger {
             display: none;
             font-size: 1.4rem;
@@ -197,9 +308,11 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.7);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
         }
-        .mobile-nav.active { right: 0; }
+        .mobile-nav.active {
+            right: 0;
+        }
         .mobile-nav a {
             font-size: 1rem;
             font-weight: 500;
@@ -207,7 +320,10 @@
             border-bottom: 1px solid #1e1e1e;
             transition: color var(--transition), padding-left var(--transition);
         }
-        .mobile-nav a:hover { color: var(--primary-red); padding-left: 8px; }
+        .mobile-nav a:hover {
+            color: var(--primary-red);
+            padding-left: 8px;
+        }
         .mobile-close {
             position: absolute;
             top: 16px;
@@ -219,18 +335,23 @@
             cursor: pointer;
             transition: transform 0.3s;
         }
-        .mobile-close:hover { transform: rotate(90deg); }
+        .mobile-close:hover {
+            transform: rotate(90deg);
+        }
         .overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1500;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.35s;
             backdrop-filter: blur(4px);
         }
-        .overlay.active { opacity: 1; pointer-events: auto; }
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
         /* ===== HERO ===== */
         #hero {
@@ -242,7 +363,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 80% 50%, rgba(230,57,70,0.06), transparent 60%);
+            background: radial-gradient(ellipse at 80% 50%, rgba(230, 57, 70, 0.06), transparent 60%);
             pointer-events: none;
         }
         .hero-grid {
@@ -260,7 +381,7 @@
         }
         .hero-content h1 span {
             color: var(--primary-red);
-            text-shadow: 0 0 40px rgba(230,57,70,0.15);
+            text-shadow: 0 0 40px rgba(230, 57, 70, 0.15);
         }
         .hero-content .sub-headline {
             color: var(--text-muted);
@@ -294,122 +415,36 @@
             font-size: 0.8rem;
         }
 
-        /* Phone mockup */
-        .hero-phone { display: flex; justify-content: center; position: relative; }
-        .phone-mockup {
-            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-            border-radius: 32px;
-            padding: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 60px rgba(230,57,70,0.08);
-            width: 220px;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.3s ease;
-        }
-        .phone-mockup:hover { transform: scale(1.02) translateY(-4px); }
-        .phone-screen {
-            background: #0a0a0a;
-            border-radius: 26px;
-            padding: 16px 12px;
-            min-height: 380px;
+        /* Hero Image */
+        .hero-image-wrapper {
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            border: 1px solid #161616;
+            align-items: center;
             position: relative;
-            overflow: hidden;
         }
-        .phone-screen .signal-label {
-            color: var(--text-muted);
-            font-size: 0.6rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 2px;
+        .hero-image-wrapper img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.08);
+            transition: transform 0.4s ease;
+            max-height: 420px;
+            object-fit: contain;
         }
-        .phone-screen .multiplier {
-            font-size: 2.6rem;
-            font-weight: 900;
-            color: var(--primary-red);
-            margin: 0 0 4px;
-            text-shadow: 0 0 30px rgba(230,57,70,0.15);
-            letter-spacing: -1px;
+        .hero-image-wrapper img:hover {
+            transform: scale(1.02);
         }
-        .phone-screen .confidence {
-            background: #141414;
-            padding: 4px 12px;
-            border-radius: 30px;
-            display: inline-block;
-            font-size: 0.6rem;
-            margin: 4px 0 6px;
-            border-left: 3px solid var(--primary-red);
-            letter-spacing: 0.3px;
-            color: #ccc;
-            align-self: flex-start;
-        }
-        .phone-screen .chart-placeholder {
-            height: 44px;
-            background: linear-gradient(90deg, #141414, #202020);
-            border-radius: 10px;
-            margin: 6px 0 8px;
-            position: relative;
-            overflow: hidden;
-        }
-        .phone-screen .chart-placeholder::after {
-            content: '';
+        .hero-image-wrapper .glow-red-bg {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
-            opacity: 0.12;
-            animation: pulseGlow 3s infinite;
-        }
-        .phone-screen .range {
-            color: var(--text-muted);
-            font-size: 0.65rem;
-            margin: 2px 0 6px;
-            letter-spacing: 0.3px;
-        }
-        .phone-screen .status {
-            background: #111;
-            padding: 6px 10px;
-            border-radius: 30px;
-            text-align: center;
-            font-size: 0.55rem;
-            color: #999;
-            margin-top: 6px;
-            border: 1px solid #1e1e1e;
-            letter-spacing: 0.3px;
-        }
-        .phone-screen .status i { color: var(--primary-red); margin-right: 4px; }
-        .glow-red-bg {
-            position: absolute;
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(230,57,70,0.1), transparent 70%);
-            top: 10%;
-            right: -10%;
-            z-index: 0;
-            animation: floatGlow 8s infinite alternate;
-        }
-        .phone-notch {
-            position: absolute;
-            top: 4px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.08), transparent 70%);
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            width: 32px;
-            height: 3px;
-            background: #1a1a1a;
-            border-radius: 10px;
-            z-index: 3;
-        }
-        @keyframes pulseGlow { 0% { opacity: 0.08; } 50% { opacity: 0.2; } 100% { opacity: 0.08; } }
-        @keyframes floatGlow { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-20px,20px) scale(1.1); } }
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--primary-red);
-            opacity: 0.05;
-            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: floatGlow 8s infinite alternate;
         }
 
         /* ===== PRICING ===== */
@@ -419,7 +454,9 @@
             border-top: 1px solid #1a1a1a;
             border-bottom: 1px solid #1a1a1a;
         }
-        #pricing .section-title { margin-bottom: 1.5rem; }
+        #pricing .section-title {
+            margin-bottom: 1.5rem;
+        }
         .pricing-scroll {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -447,18 +484,22 @@
             opacity: 0;
             transition: opacity 0.4s;
         }
-        .pricing-card:hover::before { opacity: 0.06; }
+        .pricing-card:hover::before {
+            opacity: 0.06;
+        }
         .pricing-card:hover {
             transform: translateY(-4px);
             border-color: var(--primary-red);
-            box-shadow: 0 12px 30px rgba(230,57,70,0.06);
+            box-shadow: 0 12px 30px rgba(230, 57, 70, 0.06);
         }
         .pricing-card.recommended {
             border-color: var(--primary-red);
-            box-shadow: 0 0 30px rgba(230,57,70,0.08);
+            box-shadow: 0 0 30px rgba(230, 57, 70, 0.08);
             transform: scale(1.02);
         }
-        .pricing-card.recommended:hover { transform: scale(1.04) translateY(-4px); }
+        .pricing-card.recommended:hover {
+            transform: scale(1.04) translateY(-4px);
+        }
         .badge {
             background: var(--primary-red);
             color: #fff;
@@ -485,7 +526,7 @@
             font-weight: 900;
             margin: 4px 0 8px;
             color: var(--primary-red);
-            text-shadow: 0 0 20px rgba(230,57,70,0.08);
+            text-shadow: 0 0 20px rgba(230, 57, 70, 0.08);
         }
         .pricing-card ul {
             margin: 8px 0 14px;
@@ -553,10 +594,16 @@
         }
         .step:hover .step-icon {
             border-color: var(--primary-red);
-            box-shadow: 0 0 20px rgba(230,57,70,0.08);
+            box-shadow: 0 0 20px rgba(230, 57, 70, 0.08);
         }
-        .step h3 { font-size: 1rem; margin-bottom: 4px; }
-        .step p { color: var(--text-muted); font-size: 0.8rem; }
+        .step h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
 
         /* ===== FEATURES ===== */
         #features {
@@ -585,8 +632,14 @@
             margin-bottom: 10px;
             display: inline-block;
         }
-        .feature-card h3 { font-size: 1rem; margin-bottom: 4px; }
-        .feature-card p { color: var(--text-muted); font-size: 0.8rem; }
+        .feature-card h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
 
         /* ===== APP PREVIEW ===== */
         #app-preview {
@@ -603,8 +656,13 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
-        .preview-scroll::-webkit-scrollbar { height: 3px; }
-        .preview-scroll::-webkit-scrollbar-thumb { background: var(--primary-red); border-radius: 10px; }
+        .preview-scroll::-webkit-scrollbar {
+            height: 3px;
+        }
+        .preview-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary-red);
+            border-radius: 10px;
+        }
         .preview-phone {
             flex: 0 0 160px;
             background: linear-gradient(145deg, #151515, #0a0a0a);
@@ -614,7 +672,10 @@
             scroll-snap-align: start;
             transition: all 0.3s;
         }
-        .preview-phone:hover { transform: scale(1.03); border-color: var(--primary-red); }
+        .preview-phone:hover {
+            transform: scale(1.03);
+            border-color: var(--primary-red);
+        }
         .preview-phone .screen {
             background: #0a0a0a;
             border-radius: 18px;
@@ -629,9 +690,23 @@
             text-align: center;
             border: 1px solid #161616;
         }
-        .preview-phone .screen .big { font-size: 1.8rem; font-weight: 700; color: var(--white); margin-bottom: 2px; }
-        .preview-phone .screen .red { color: var(--primary-red); font-weight: 700; }
-        .preview-phone .screen .small-label { font-size: 0.5rem; color: #666; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 4px; }
+        .preview-phone .screen .big {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 2px;
+        }
+        .preview-phone .screen .red {
+            color: var(--primary-red);
+            font-weight: 700;
+        }
+        .preview-phone .screen .small-label {
+            font-size: 0.5rem;
+            color: #666;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
 
         /* ===== CTA ===== */
         #cta {
@@ -641,8 +716,16 @@
             border-top: 1px solid #1a0a0a;
             border-bottom: 1px solid #1a0a0a;
         }
-        #cta h2 { font-size: 2rem; margin-bottom: 8px; }
-        #cta p { color: var(--text-muted); max-width: 500px; margin: 0 auto 20px; font-size: 0.95rem; }
+        #cta h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        #cta p {
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 20px;
+            font-size: 0.95rem;
+        }
 
         /* ===== FAQ ===== */
         #faq {
@@ -667,9 +750,18 @@
             user-select: none;
             gap: 12px;
         }
-        .faq-question:hover { background: #1a1a1a; }
-        .faq-question i { transition: transform 0.4s; color: var(--primary-red); font-size: 0.9rem; flex-shrink: 0; }
-        .faq-item.active .faq-question i { transform: rotate(180deg); }
+        .faq-question:hover {
+            background: #1a1a1a;
+        }
+        .faq-question i {
+            transition: transform 0.4s;
+            color: var(--primary-red);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
         .faq-answer {
             max-height: 0;
             overflow: hidden;
@@ -679,7 +771,10 @@
             line-height: 1.6;
             font-size: 0.9rem;
         }
-        .faq-item.active .faq-answer { max-height: 300px; padding: 0 18px 18px; }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 18px 18px;
+        }
 
         /* ===== CONTACT ===== */
         #contact {
@@ -688,8 +783,18 @@
             text-align: center;
             border-top: 1px solid #1a1a1a;
         }
-        #contact p { color: var(--text-muted); max-width: 500px; margin: 0 auto 18px; font-size: 0.95rem; }
-        #contact .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        #contact p {
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 18px;
+            font-size: 0.95rem;
+        }
+        #contact .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
 
         /* ===== RESPONSIBLE USE ===== */
         #responsible {
@@ -725,15 +830,23 @@
             gap: 24px;
             margin-bottom: 20px;
         }
-        .footer-col h4 { margin-bottom: 10px; font-size: 0.9rem; color: var(--white); letter-spacing: 0.3px; }
-        .footer-col a, .footer-col p {
+        .footer-col h4 {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--white);
+            letter-spacing: 0.3px;
+        }
+        .footer-col a,
+        .footer-col p {
             color: var(--text-muted);
             font-size: 0.8rem;
             display: block;
             margin-bottom: 5px;
             transition: color var(--transition);
         }
-        .footer-col a:hover { color: var(--primary-red); }
+        .footer-col a:hover {
+            color: var(--primary-red);
+        }
         .footer-social a {
             display: inline-block;
             margin-right: 12px;
@@ -741,7 +854,10 @@
             color: var(--text-muted);
             transition: all var(--transition);
         }
-        .footer-social a:hover { color: var(--primary-red); transform: translateY(-2px); }
+        .footer-social a:hover {
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
         .footer-bottom {
             border-top: 1px solid #141414;
             padding-top: 14px;
@@ -763,7 +879,7 @@
             border-radius: 50%;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(230,57,70,0.35);
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.35);
             transition: all 0.3s;
             opacity: 0;
             pointer-events: none;
@@ -772,14 +888,20 @@
             align-items: center;
             justify-content: center;
         }
-        #backToTop.visible { opacity: 1; pointer-events: auto; }
-        #backToTop:hover { transform: scale(1.08); box-shadow: 0 8px 30px rgba(230,57,70,0.5); }
+        #backToTop.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #backToTop:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 30px rgba(230, 57, 70, 0.5);
+        }
 
         /* ===== POPUP ===== */
         .subscribe-popup-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
             z-index: 3000;
             display: flex;
@@ -790,7 +912,10 @@
             transition: opacity 0.4s ease;
             padding: 16px;
         }
-        .subscribe-popup-overlay.active { opacity: 1; pointer-events: auto; }
+        .subscribe-popup-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
         .subscribe-popup {
             background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
             border-radius: 24px;
@@ -798,7 +923,7 @@
             max-width: 440px;
             width: 100%;
             border: 1px solid #2a2a2a;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
             transform: scale(0.9) translateY(20px);
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
             opacity: 0;
@@ -821,10 +946,27 @@
             transition: color 0.3s, transform 0.3s;
             padding: 4px;
         }
-        .subscribe-popup .popup-close:hover { color: var(--primary-red); transform: rotate(90deg); }
-        .subscribe-popup .popup-icon { font-size: 2.6rem; color: var(--primary-red); margin-bottom: 10px; display: block; }
-        .subscribe-popup h2 { font-size: 1.4rem; margin-bottom: 8px; color: var(--white); }
-        .subscribe-popup p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 18px; }
+        .subscribe-popup .popup-close:hover {
+            color: var(--primary-red);
+            transform: rotate(90deg);
+        }
+        .subscribe-popup .popup-icon {
+            font-size: 2.6rem;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .subscribe-popup h2 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+        .subscribe-popup p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
         .subscribe-popup .whatsapp-btn {
             display: inline-flex;
             align-items: center;
@@ -838,53 +980,138 @@
             border: none;
             cursor: pointer;
             transition: all var(--transition);
-            box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
             text-decoration: none;
         }
         .subscribe-popup .whatsapp-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
         }
-        .subscribe-popup .whatsapp-btn i { font-size: 1.3rem; }
-        .subscribe-popup .popup-note { margin-top: 12px; color: #666; font-size: 0.75rem; letter-spacing: 0.3px; }
+        .subscribe-popup .whatsapp-btn i {
+            font-size: 1.3rem;
+        }
+        .subscribe-popup .popup-note {
+            margin-top: 12px;
+            color: #666;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+        }
 
         /* ===== SCROLL REVEAL ===== */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.08;
+            }
+            50% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0.08;
+            }
+        }
+        @keyframes floatGlow {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .hero-grid { gap: 20px; }
-            .hero-content h1 { font-size: 2rem; }
-            .phone-mockup { width: 190px; }
-            .phone-screen { min-height: 320px; padding: 14px 10px; }
-            .phone-screen .multiplier { font-size: 2.2rem; }
-            .pricing-card { padding: 16px 12px; }
-            .pricing-card .price { font-size: 1.6rem; }
+            .hero-grid {
+                gap: 20px;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-image-wrapper img {
+                max-height: 320px;
+            }
+            .pricing-card {
+                padding: 16px 12px;
+            }
+            .pricing-card .price {
+                font-size: 1.6rem;
+            }
         }
 
         @media (max-width: 992px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 16px; }
-            .hero-content p { margin-left: auto; margin-right: auto; max-width: 100%; }
-            .hero-buttons { justify-content: center; }
-            .hero-features { justify-content: center; }
-            .hero-phone { order: -1; }
-            .phone-mockup { width: 200px; }
-            .phone-screen { min-height: 340px; }
-            .pricing-scroll { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-            .pricing-card.recommended { transform: scale(1.02); }
-            .pricing-card.recommended:hover { transform: scale(1.04) translateY(-4px); }
-            .feature-grid { grid-template-columns: repeat(2, 1fr); }
-            .steps { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 16px;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 100%;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-features {
+                justify-content: center;
+            }
+            .hero-image-wrapper {
+                order: -1;
+            }
+            .hero-image-wrapper img {
+                max-height: 300px;
+                max-width: 80%;
+            }
+            .pricing-scroll {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+            .pricing-card.recommended {
+                transform: scale(1.02);
+            }
+            .pricing-card.recommended:hover {
+                transform: scale(1.04) translateY(-4px);
+            }
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hamburger { display: block; }
-            .hero-content h1 { font-size: 1.8rem; }
-            .hero-content .sub-headline { font-size: 0.85rem; margin: 8px 0 12px; }
-            .hero-buttons { flex-direction: row; flex-wrap: nowrap; gap: 8px; }
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .hero-content .sub-headline {
+                font-size: 0.85rem;
+                margin: 8px 0 12px;
+            }
+            .hero-buttons {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                gap: 8px;
+            }
             .hero-buttons .btn-primary,
             .hero-buttons .btn-secondary {
                 flex: 1;
@@ -893,14 +1120,15 @@
                 min-height: 38px;
                 white-space: nowrap;
             }
-            .hero-features { font-size: 0.7rem; gap: 4px 12px; }
-            .phone-mockup { width: 170px; padding: 6px; border-radius: 26px; }
-            .phone-screen { min-height: 280px; padding: 12px 10px; border-radius: 22px; }
-            .phone-screen .multiplier { font-size: 2rem; }
-            .phone-screen .chart-placeholder { height: 36px; }
-            .phone-screen .status { font-size: 0.5rem; padding: 4px 8px; }
-            .phone-notch { width: 28px; height: 3px; top: 3px; }
-            .glow-red-bg { width: 180px; height: 180px; }
+            .hero-features {
+                font-size: 0.7rem;
+                gap: 4px 12px;
+            }
+            .hero-image-wrapper img {
+                max-height: 240px;
+                max-width: 90%;
+                border-radius: 16px;
+            }
 
             .pricing-scroll {
                 display: flex;
@@ -910,129 +1138,346 @@
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
             }
-            .pricing-scroll::-webkit-scrollbar { height: 3px; }
-            .pricing-scroll::-webkit-scrollbar-thumb { background: var(--primary-red); border-radius: 10px; }
+            .pricing-scroll::-webkit-scrollbar {
+                height: 3px;
+            }
+            .pricing-scroll::-webkit-scrollbar-thumb {
+                background: var(--primary-red);
+                border-radius: 10px;
+            }
             .pricing-card {
                 flex: 0 0 200px;
                 scroll-snap-align: start;
                 padding: 16px 14px;
             }
-            .pricing-card.recommended { transform: scale(1.02); }
-            .pricing-card.recommended:hover { transform: scale(1.04) translateY(-4px); }
-            .pricing-card h3 { font-size: 1rem; }
-            .pricing-card .price { font-size: 1.6rem; }
-            .pricing-card ul li { font-size: 0.7rem; }
-            .pricing-card .btn-primary { font-size: 0.7rem; padding: 8px; min-height: 34px; }
+            .pricing-card.recommended {
+                transform: scale(1.02);
+            }
+            .pricing-card.recommended:hover {
+                transform: scale(1.04) translateY(-4px);
+            }
+            .pricing-card h3 {
+                font-size: 1rem;
+            }
+            .pricing-card .price {
+                font-size: 1.6rem;
+            }
+            .pricing-card ul li {
+                font-size: 0.7rem;
+            }
+            .pricing-card .btn-primary {
+                font-size: 0.7rem;
+                padding: 8px;
+                min-height: 34px;
+            }
 
-            .section-title { font-size: 1.5rem; margin-bottom: 1.2rem; }
-            .feature-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .feature-card { padding: 14px 12px; }
-            .feature-card i { font-size: 1.6rem; margin-bottom: 6px; }
-            .feature-card h3 { font-size: 0.85rem; }
-            .feature-card p { font-size: 0.75rem; }
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.2rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .feature-card {
+                padding: 14px 12px;
+            }
+            .feature-card i {
+                font-size: 1.6rem;
+                margin-bottom: 6px;
+            }
+            .feature-card h3 {
+                font-size: 0.85rem;
+            }
+            .feature-card p {
+                font-size: 0.75rem;
+            }
 
-            .steps { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .step { padding: 14px 10px; }
-            .step-icon { width: 44px; height: 44px; font-size: 1.2rem; margin-bottom: 6px; }
-            .step h3 { font-size: 0.85rem; }
-            .step p { font-size: 0.7rem; }
+            .steps {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .step {
+                padding: 14px 10px;
+            }
+            .step-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+                margin-bottom: 6px;
+            }
+            .step h3 {
+                font-size: 0.85rem;
+            }
+            .step p {
+                font-size: 0.7rem;
+            }
 
-            .preview-phone { flex: 0 0 130px; }
-            .preview-phone .screen { min-height: 200px; padding: 10px 8px; font-size: 0.6rem; }
-            .preview-phone .screen .big { font-size: 1.4rem; }
+            .preview-phone {
+                flex: 0 0 130px;
+            }
+            .preview-phone .screen {
+                min-height: 200px;
+                padding: 10px 8px;
+                font-size: 0.6rem;
+            }
+            .preview-phone .screen .big {
+                font-size: 1.4rem;
+            }
 
-            #cta h2 { font-size: 1.5rem; }
-            #cta p { font-size: 0.85rem; margin-bottom: 16px; }
+            #cta h2 {
+                font-size: 1.5rem;
+            }
+            #cta p {
+                font-size: 0.85rem;
+                margin-bottom: 16px;
+            }
 
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-            .footer-col h4 { font-size: 0.8rem; margin-bottom: 6px; }
-            .footer-col a, .footer-col p { font-size: 0.7rem; }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+            .footer-col h4 {
+                font-size: 0.8rem;
+                margin-bottom: 6px;
+            }
+            .footer-col a,
+            .footer-col p {
+                font-size: 0.7rem;
+            }
 
-            .subscribe-popup { padding: 24px 18px; margin: 12px; }
-            .subscribe-popup h2 { font-size: 1.2rem; }
-            .subscribe-popup p { font-size: 0.8rem; }
-            .subscribe-popup .whatsapp-btn { padding: 10px 20px; font-size: 0.85rem; width: 100%; justify-content: center; }
+            .subscribe-popup {
+                padding: 24px 18px;
+                margin: 12px;
+            }
+            .subscribe-popup h2 {
+                font-size: 1.2rem;
+            }
+            .subscribe-popup p {
+                font-size: 0.8rem;
+            }
+            .subscribe-popup .whatsapp-btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+                width: 100%;
+                justify-content: center;
+            }
 
-            #contact .buttons { flex-direction: column; align-items: center; }
-            #contact .buttons a { width: 100%; max-width: 280px; }
-            #contact .btn-primary, #contact .btn-secondary { font-size: 0.8rem; padding: 10px 16px; }
+            #contact .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            #contact .buttons a {
+                width: 100%;
+                max-width: 280px;
+            }
+            #contact .btn-primary,
+            #contact .btn-secondary {
+                font-size: 0.8rem;
+                padding: 10px 16px;
+            }
         }
 
         @media (max-width: 480px) {
-            .container { padding: 0 12px; }
-            .hero-content h1 { font-size: 1.5rem; }
-            .hero-content .sub-headline { font-size: 0.8rem; }
+            .container {
+                padding: 0 12px;
+            }
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+            .hero-content .sub-headline {
+                font-size: 0.8rem;
+            }
             .hero-buttons .btn-primary,
             .hero-buttons .btn-secondary {
                 font-size: 0.65rem;
                 padding: 8px 10px;
                 min-height: 34px;
             }
-            .hero-features { font-size: 0.6rem; gap: 2px 8px; }
-            .hero-features i { font-size: 0.6rem; }
-            .phone-mockup { width: 150px; padding: 5px; border-radius: 22px; }
-            .phone-screen { min-height: 240px; padding: 10px 8px; border-radius: 18px; }
-            .phone-screen .multiplier { font-size: 1.6rem; }
-            .phone-screen .signal-label { font-size: 0.5rem; }
-            .phone-screen .confidence { font-size: 0.5rem; padding: 3px 8px; }
-            .phone-screen .chart-placeholder { height: 30px; }
-            .phone-screen .range { font-size: 0.55rem; }
-            .phone-screen .status { font-size: 0.45rem; padding: 3px 6px; }
-            .phone-notch { width: 24px; height: 2px; top: 2px; }
+            .hero-features {
+                font-size: 0.6rem;
+                gap: 2px 8px;
+            }
+            .hero-features i {
+                font-size: 0.6rem;
+            }
+            .hero-image-wrapper img {
+                max-height: 180px;
+                max-width: 95%;
+                border-radius: 12px;
+            }
 
-            .pricing-card { flex: 0 0 170px; padding: 12px 10px; border-radius: 16px; }
-            .pricing-card h3 { font-size: 0.85rem; }
-            .pricing-card .duration { font-size: 0.6rem; }
-            .pricing-card .price { font-size: 1.3rem; margin: 2px 0 6px; }
-            .pricing-card ul { margin: 4px 0 10px; }
-            .pricing-card ul li { font-size: 0.6rem; gap: 4px; margin-bottom: 3px; }
-            .pricing-card .btn-primary { font-size: 0.6rem; padding: 6px; min-height: 30px; }
-            .badge { font-size: 0.45rem; padding: 2px 10px; margin-bottom: 4px; }
+            .pricing-card {
+                flex: 0 0 170px;
+                padding: 12px 10px;
+                border-radius: 16px;
+            }
+            .pricing-card h3 {
+                font-size: 0.85rem;
+            }
+            .pricing-card .duration {
+                font-size: 0.6rem;
+            }
+            .pricing-card .price {
+                font-size: 1.3rem;
+                margin: 2px 0 6px;
+            }
+            .pricing-card ul {
+                margin: 4px 0 10px;
+            }
+            .pricing-card ul li {
+                font-size: 0.6rem;
+                gap: 4px;
+                margin-bottom: 3px;
+            }
+            .pricing-card .btn-primary {
+                font-size: 0.6rem;
+                padding: 6px;
+                min-height: 30px;
+            }
+            .badge {
+                font-size: 0.45rem;
+                padding: 2px 10px;
+                margin-bottom: 4px;
+            }
 
-            .section-title { font-size: 1.2rem; }
-            .section-title::after { width: 40px; height: 2px; margin-top: 6px; }
+            .section-title {
+                font-size: 1.2rem;
+            }
+            .section-title::after {
+                width: 40px;
+                height: 2px;
+                margin-top: 6px;
+            }
 
-            .feature-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-            .feature-card { padding: 10px 8px; border-radius: 14px; }
-            .feature-card i { font-size: 1.2rem; margin-bottom: 4px; }
-            .feature-card h3 { font-size: 0.7rem; }
-            .feature-card p { font-size: 0.6rem; }
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .feature-card {
+                padding: 10px 8px;
+                border-radius: 14px;
+            }
+            .feature-card i {
+                font-size: 1.2rem;
+                margin-bottom: 4px;
+            }
+            .feature-card h3 {
+                font-size: 0.7rem;
+            }
+            .feature-card p {
+                font-size: 0.6rem;
+            }
 
-            .steps { grid-template-columns: 1fr 1fr; gap: 8px; }
-            .step { padding: 10px 8px; border-radius: 14px; }
-            .step-icon { width: 36px; height: 36px; font-size: 1rem; margin-bottom: 4px; }
-            .step h3 { font-size: 0.7rem; }
-            .step p { font-size: 0.6rem; }
+            .steps {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .step {
+                padding: 10px 8px;
+                border-radius: 14px;
+            }
+            .step-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+                margin-bottom: 4px;
+            }
+            .step h3 {
+                font-size: 0.7rem;
+            }
+            .step p {
+                font-size: 0.6rem;
+            }
 
-            .preview-phone { flex: 0 0 110px; padding: 6px; border-radius: 18px; }
-            .preview-phone .screen { min-height: 160px; padding: 8px 6px; border-radius: 14px; font-size: 0.5rem; }
-            .preview-phone .screen .big { font-size: 1.2rem; }
+            .preview-phone {
+                flex: 0 0 110px;
+                padding: 6px;
+                border-radius: 18px;
+            }
+            .preview-phone .screen {
+                min-height: 160px;
+                padding: 8px 6px;
+                border-radius: 14px;
+                font-size: 0.5rem;
+            }
+            .preview-phone .screen .big {
+                font-size: 1.2rem;
+            }
 
-            #cta h2 { font-size: 1.2rem; }
-            #cta p { font-size: 0.75rem; }
+            #cta h2 {
+                font-size: 1.2rem;
+            }
+            #cta p {
+                font-size: 0.75rem;
+            }
 
-            .faq-question { padding: 10px 14px; font-size: 0.8rem; }
-            .faq-answer { font-size: 0.8rem; padding: 0 14px; }
-            .faq-item.active .faq-answer { padding: 0 14px 14px; }
+            .faq-question {
+                padding: 10px 14px;
+                font-size: 0.8rem;
+            }
+            .faq-answer {
+                font-size: 0.8rem;
+                padding: 0 14px;
+            }
+            .faq-item.active .faq-answer {
+                padding: 0 14px 14px;
+            }
 
-            #responsible h3 { font-size: 0.9rem; }
-            #responsible p { font-size: 0.75rem; }
+            #responsible h3 {
+                font-size: 0.9rem;
+            }
+            #responsible p {
+                font-size: 0.75rem;
+            }
 
-            .footer-grid { grid-template-columns: 1fr; gap: 12px; }
-            .footer-col h4 { font-size: 0.75rem; margin-bottom: 4px; }
-            .footer-col a, .footer-col p { font-size: 0.65rem; margin-bottom: 3px; }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .footer-col h4 {
+                font-size: 0.75rem;
+                margin-bottom: 4px;
+            }
+            .footer-col a,
+            .footer-col p {
+                font-size: 0.65rem;
+                margin-bottom: 3px;
+            }
 
-            #backToTop { width: 34px; height: 34px; font-size: 0.8rem; bottom: 12px; right: 12px; }
+            #backToTop {
+                width: 34px;
+                height: 34px;
+                font-size: 0.8rem;
+                bottom: 12px;
+                right: 12px;
+            }
 
-            .subscribe-popup { padding: 20px 14px; }
-            .subscribe-popup h2 { font-size: 1rem; }
-            .subscribe-popup p { font-size: 0.75rem; margin-bottom: 14px; }
-            .subscribe-popup .whatsapp-btn { font-size: 0.8rem; padding: 8px 16px; }
-            .subscribe-popup .popup-icon { font-size: 2rem; margin-bottom: 6px; }
+            .subscribe-popup {
+                padding: 20px 14px;
+            }
+            .subscribe-popup h2 {
+                font-size: 1rem;
+            }
+            .subscribe-popup p {
+                font-size: 0.75rem;
+                margin-bottom: 14px;
+            }
+            .subscribe-popup .whatsapp-btn {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+            .subscribe-popup .popup-icon {
+                font-size: 2rem;
+                margin-bottom: 6px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
@@ -1065,6 +1510,26 @@
                 <li><a href="#how-it-works">HOW</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">CONTACT</a></li>
+                <!-- Language Selector -->
+                <li class="lang-selector" id="langSelector">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLangLabel">EN</span>
+                    <span class="arrow">▼</span>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <a href="#" data-lang="en" class="active-lang">
+                            <span class="flag">🇬🇧</span> English
+                        </a>
+                        <a href="#" data-lang="fr">
+                            <span class="flag">🇫🇷</span> Français
+                        </a>
+                        <a href="#" data-lang="es">
+                            <span class="flag">🇪🇸</span> Español
+                        </a>
+                        <a href="#" data-lang="pt">
+                            <span class="flag">🇵🇹</span> Português
+                        </a>
+                    </div>
+                </li>
                 <li><a href="#" class="btn-primary subscribe-trigger">SUBSCRIBE</a></li>
             </ul>
             <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
@@ -1088,19 +1553,9 @@
                     <span><i class="fas fa-headset"></i> 24/7 Support</span>
                 </div>
             </div>
-            <div class="hero-phone">
+            <div class="hero-image-wrapper">
                 <div class="glow-red-bg"></div>
-                <div class="phone-mockup">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <div class="signal-label"><i class="fas fa-satellite" style="margin-right:4px;"></i> NEXT SIGNAL</div>
-                        <div class="multiplier">2.14x</div>
-                        <div class="confidence"><i class="fas fa-circle" style="color:var(--primary-red);font-size:0.35rem;margin-right:4px;"></i> CONFIDENCE: HIGH</div>
-                        <div class="chart-placeholder"></div>
-                        <div class="range">RECOMMENDED RANGE 2.10x – 2.30x</div>
-                        <div class="status"><i class="fas fa-clock"></i> WAITING FOR NEXT ROUND</div>
-                    </div>
-                </div>
+                <img src="https://i.postimg.cc/34gRkGKt/Whats-App-Image-2026-08-08-at-03-42-30.jpg" alt="Aviator Predictor App Preview" loading="lazy" />
             </div>
         </div>
     </section>
@@ -1115,41 +1570,41 @@
                     <div class="badge">🔥 HIGHLY RECOMMENDED</div>
                     <h3>1 MONTH</h3>
                     <p class="duration">30 Days Access</p>
-                    <div class="price">$29.99</div>
+                    <div class="price">$19.00</div>
                     <ul>
                         <li>Signal access</li>
                         <li>Supported-device access</li>
                         <li>Customer support</li>
                         <li>Regular updates</li>
                     </ul>
-                    <a href="#" class="btn-primary subscribe-trigger" data-plan="1 Month - $29.99">SUBSCRIBE NOW</a>
+                    <a href="#" class="btn-primary subscribe-trigger" data-plan="1 Month - $19.00">SUBSCRIBE NOW</a>
                 </div>
                 <!-- Card 2 -->
                 <div class="pricing-card reveal">
                     <div class="badge" style="background:transparent;color:var(--text-muted);border:1px solid #333;">POPULAR</div>
                     <h3>3 MONTHS</h3>
                     <p class="duration">90 Days Access</p>
-                    <div class="price">$69.99</div>
+                    <div class="price">$49.00</div>
                     <ul>
                         <li>Signal access</li>
                         <li>Supported-device access</li>
                         <li>Priority support</li>
                         <li>Regular updates</li>
                     </ul>
-                    <a href="#" class="btn-primary subscribe-trigger" data-plan="3 Months - $69.99">SUBSCRIBE NOW</a>
+                    <a href="#" class="btn-primary subscribe-trigger" data-plan="3 Months - $49.00">SUBSCRIBE NOW</a>
                 </div>
                 <!-- Card 3 -->
                 <div class="pricing-card reveal">
                     <h3>6 MONTHS</h3>
                     <p class="duration">180 Days Access</p>
-                    <div class="price">$119.99</div>
+                    <div class="price">$99.00</div>
                     <ul>
                         <li>Signal access</li>
                         <li>Supported-device access</li>
                         <li>VIP support</li>
                         <li>Regular updates</li>
                     </ul>
-                    <a href="#" class="btn-primary subscribe-trigger" data-plan="6 Months - $119.99">SUBSCRIBE NOW</a>
+                    <a href="#" class="btn-primary subscribe-trigger" data-plan="6 Months - $99.00">SUBSCRIBE NOW</a>
                 </div>
             </div>
         </div>
@@ -1160,10 +1615,26 @@
         <div class="container">
             <h2 class="section-title">HOW IT <span>WORKS</span></h2>
             <div class="steps">
-                <div class="step reveal"><div class="step-icon"><i class="fas fa-credit-card"></i></div><h3>SUBSCRIBE</h3><p>Choose your plan and complete payment.</p></div>
-                <div class="step reveal"><div class="step-icon"><i class="fas fa-download"></i></div><h3>DOWNLOAD</h3><p>Get instructions to install the app.</p></div>
-                <div class="step reveal"><div class="step-icon"><i class="fas fa-chart-line"></i></div><h3>FOLLOW SIGNALS</h3><p>Review available signals and info.</p></div>
-                <div class="step reveal"><div class="step-icon"><i class="fas fa-user-check"></i></div><h3>MAKE DECISIONS</h3><p>Use tools and decide responsibly.</p></div>
+                <div class="step reveal">
+                    <div class="step-icon"><i class="fas fa-credit-card"></i></div>
+                    <h3>SUBSCRIBE</h3>
+                    <p>Choose your plan and complete payment.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-icon"><i class="fas fa-download"></i></div>
+                    <h3>DOWNLOAD</h3>
+                    <p>Get instructions to install the app.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>FOLLOW SIGNALS</h3>
+                    <p>Review available signals and info.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-icon"><i class="fas fa-user-check"></i></div>
+                    <h3>MAKE DECISIONS</h3>
+                    <p>Use tools and decide responsibly.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1173,12 +1644,30 @@
         <div class="container">
             <h2 class="section-title">POWERFUL <span>FEATURES</span></h2>
             <div class="feature-grid">
-                <div class="feature-card reveal"><i class="fas fa-bolt"></i><h3>Real-Time Signals</h3><p>Live updates through a clean interface.</p></div>
-                <div class="feature-card reveal"><i class="fas fa-paint-brush"></i><h3>Easy-to-Use</h3><p>Intuitive for new and experienced users.</p></div>
-                <div class="feature-card reveal"><i class="fas fa-mobile-alt"></i><h3>Mobile Friendly</h3><p>Optimized for supported devices.</p></div>
-                <div class="feature-card reveal"><i class="fas fa-key"></i><h3>Subscription Access</h3><p>Controlled access per subscription.</p></div>
-                <div class="feature-card reveal"><i class="fas fa-graduation-cap"></i><h3>Tutorials</h3><p>Step-by-step guidance included.</p></div>
-                <div class="feature-card reveal"><i class="fas fa-life-ring"></i><h3>Support</h3><p>Dedicated team ready to assist.</p></div>
+                <div class="feature-card reveal"><i class="fas fa-bolt"></i>
+                    <h3>Real-Time Signals</h3>
+                    <p>Live updates through a clean interface.</p>
+                </div>
+                <div class="feature-card reveal"><i class="fas fa-paint-brush"></i>
+                    <h3>Easy-to-Use</h3>
+                    <p>Intuitive for new and experienced users.</p>
+                </div>
+                <div class="feature-card reveal"><i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Friendly</h3>
+                    <p>Optimized for supported devices.</p>
+                </div>
+                <div class="feature-card reveal"><i class="fas fa-key"></i>
+                    <h3>Subscription Access</h3>
+                    <p>Controlled access per subscription.</p>
+                </div>
+                <div class="feature-card reveal"><i class="fas fa-graduation-cap"></i>
+                    <h3>Tutorials</h3>
+                    <p>Step-by-step guidance included.</p>
+                </div>
+                <div class="feature-card reveal"><i class="fas fa-life-ring"></i>
+                    <h3>Support</h3>
+                    <p>Dedicated team ready to assist.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1188,11 +1677,46 @@
         <div class="container">
             <h2 class="section-title">APP <span>PREVIEW</span></h2>
             <div class="preview-scroll">
-                <div class="preview-phone"><div class="screen"><div class="big">📊</div><div class="red">Dashboard</div><span style="margin:2px 0;font-size:0.6rem;">NEXT 2.14x</span><div class="small-label">Live overview</div></div></div>
-                <div class="preview-phone"><div class="screen"><div class="big">📡</div><div class="red">Signal</div><span style="font-size:0.6rem;">CONFIDENCE: HIGH</span><div class="small-label">Real-time</div></div></div>
-                <div class="preview-phone"><div class="screen"><div class="big">📈</div><div class="red">History</div><span style="font-size:0.6rem;">Last 10 rounds</span><div class="small-label">Track</div></div></div>
-                <div class="preview-phone"><div class="screen"><div class="big">📉</div><div class="red">Stats</div><span style="font-size:0.6rem;">Avg 2.1x</span><div class="small-label">Insights</div></div></div>
-                <div class="preview-phone"><div class="screen"><div class="big">⚙️</div><div class="red">Settings</div><span style="font-size:0.6rem;">Tutorial &amp; support</span><div class="small-label">Customize</div></div></div>
+                <div class="preview-phone">
+                    <div class="screen">
+                        <div class="big">📊</div>
+                        <div class="red">Dashboard</div>
+                        <span style="margin:2px 0;font-size:0.6rem;">NEXT 2.14x</span>
+                        <div class="small-label">Live overview</div>
+                    </div>
+                </div>
+                <div class="preview-phone">
+                    <div class="screen">
+                        <div class="big">📡</div>
+                        <div class="red">Signal</div>
+                        <span style="font-size:0.6rem;">CONFIDENCE: HIGH</span>
+                        <div class="small-label">Real-time</div>
+                    </div>
+                </div>
+                <div class="preview-phone">
+                    <div class="screen">
+                        <div class="big">📈</div>
+                        <div class="red">History</div>
+                        <span style="font-size:0.6rem;">Last 10 rounds</span>
+                        <div class="small-label">Track</div>
+                    </div>
+                </div>
+                <div class="preview-phone">
+                    <div class="screen">
+                        <div class="big">📉</div>
+                        <div class="red">Stats</div>
+                        <span style="font-size:0.6rem;">Avg 2.1x</span>
+                        <div class="small-label">Insights</div>
+                    </div>
+                </div>
+                <div class="preview-phone">
+                    <div class="screen">
+                        <div class="big">⚙️</div>
+                        <div class="red">Settings</div>
+                        <span style="font-size:0.6rem;">Tutorial &amp; support</span>
+                        <div class="small-label">Customize</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1315,7 +1839,7 @@
             <button class="popup-close" id="popupClose"><i class="fas fa-times"></i></button>
             <span class="popup-icon"><i class="fas fa-headset"></i></span>
             <h2 id="popupPlanTitle">Contact Support to Subscribe</h2>
-            <p id="popupPlanDesc">To complete your subscription for <strong id="planNameDisplay">1 Month - $29.99</strong>, please reach out to our support team via WhatsApp. They will guide you through the process.</p>
+            <p id="popupPlanDesc">To complete your subscription for <strong id="planNameDisplay">1 Month - $19.00</strong>, please reach out to our support team via WhatsApp. They will guide you through the process.</p>
             <a href="https://wa.me/15814659038" target="_blank" class="whatsapp-btn" id="whatsappLink">
                 <i class="fab fa-whatsapp"></i> Chat on WhatsApp
             </a>
@@ -1341,6 +1865,75 @@
             const popupPlanDesc = document.getElementById('popupPlanDesc');
             const whatsappLink = document.getElementById('whatsappLink');
 
+            // ---- Language Selector ----
+            const langSelector = document.getElementById('langSelector');
+            const langDropdown = document.getElementById('langDropdown');
+            const currentLangLabel = document.getElementById('currentLangLabel');
+            const langOptions = langDropdown.querySelectorAll('a');
+
+            // Toggle dropdown
+            langSelector.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+                langDropdown.classList.toggle('open');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                langSelector.classList.remove('active');
+                langDropdown.classList.remove('open');
+            });
+
+            // Language selection
+            langOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const lang = this.getAttribute('data-lang');
+                    const label = this.textContent.trim();
+
+                    // Update current language label
+                    const flag = this.querySelector('.flag')?.textContent || '🌐';
+                    currentLangLabel.textContent = lang.toUpperCase();
+
+                    // Update active state
+                    langOptions.forEach(opt => opt.classList.remove('active-lang'));
+                    this.classList.add('active-lang');
+
+                    // Close dropdown
+                    langSelector.classList.remove('active');
+                    langDropdown.classList.remove('open');
+
+                    // Log language change (you can add translation logic here)
+                    console.log('Language changed to:', lang);
+
+                    // Optional: Show a small notification
+                    const notification = document.createElement('div');
+                    notification.style.cssText = `
+                                position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+                                background: #1a1a1a; color: #fff; padding: 10px 24px;
+                                border-radius: 12px; border: 1px solid #333;
+                                font-size: 0.85rem; z-index: 9999;
+                                animation: fadeInOut 2s ease forwards;
+                            `;
+                    notification.textContent = `🌐 Language changed to ${label}`;
+                    document.body.appendChild(notification);
+                    setTimeout(() => notification.remove(), 2000);
+                });
+            });
+
+            // Add fade animation for notification
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = `
+                        @keyframes fadeInOut {
+                            0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+                            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                            85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                            100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+                        }
+                    `;
+            document.head.appendChild(styleSheet);
+
             // ---- Subscription popup with plan detection ----
             const subscribeTriggers = document.querySelectorAll('.subscribe-trigger');
 
@@ -1350,13 +1943,11 @@
                 const plan = trigger.getAttribute('data-plan') || 'Subscription Plan';
                 const planText = plan;
 
-                // Update popup content with plan info
                 planNameDisplay.textContent = planText;
                 popupPlanTitle.textContent = 'Subscribe to ' + planText;
                 popupPlanDesc.innerHTML = 'To complete your subscription for <strong>' + planText +
                     '</strong>, please reach out to our support team via WhatsApp. They will guide you through the process.';
 
-                // Update WhatsApp link with plan reference (optional)
                 const waNumber = '15814659038';
                 const waMessage = encodeURIComponent(
                     'Hello! I would like to subscribe to the ' + planText +
@@ -1438,7 +2029,7 @@
 
             // ---- Active nav link ----
             const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-links a:not(.btn-primary)');
+            const navLinks = document.querySelectorAll('.nav-links a:not(.btn-primary):not(.lang-selector)');
             window.addEventListener('scroll', function() {
                 let current = '';
                 sections.forEach(section => {
@@ -1447,8 +2038,10 @@
                 });
                 navLinks.forEach(link => {
                     const href = link.getAttribute('href');
-                    link.style.color = href === '#' + current ? '#e63946' : '';
-                    link.style.fontWeight = href === '#' + current ? '600' : '500';
+                    if (href) {
+                        link.style.color = href === '#' + current ? '#e63946' : '';
+                        link.style.fontWeight = href === '#' + current ? '600' : '500';
+                    }
                 });
             });
 
@@ -1463,22 +2056,10 @@
                 });
             });
 
-            // ---- Hero particles ----
-            const hero = document.getElementById('hero');
-            for (let i = 0; i < 6; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                const size = 3 + Math.random() * 10;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animation = `floatGlow ${10 + Math.random() * 20}s infinite alternate`;
-                particle.style.opacity = 0.03 + Math.random() * 0.05;
-                hero.appendChild(particle);
-            }
-
-            console.log('🚀 Aviator Predictor — squeezed premium page loaded.');
+            console.log('🚀 Aviator Predictor — premium page with image and language selector loaded.');
+            console.log('📸 Hero image URL: https://i.postimg.cc/34gRkGKt/Whats-App-Image-2026-08-08-at-03-42-30.jpg');
+            console.log('💰 Updated prices: $19.00 | $49.00 | $99.00');
+            console.log('🌐 Language selector ready with 4 languages.');
         })();
     </script>
 </body>
