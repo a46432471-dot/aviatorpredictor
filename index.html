@@ -213,7 +213,7 @@
             border-radius: 30px;
             transition: all var(--transition);
             gap: 4px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: var(--text-muted);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -222,6 +222,7 @@
             user-select: none;
             flex-shrink: 0;
             min-height: 32px;
+            max-width: 90px;
         }
         .lang-selector:hover {
             background: rgba(255, 255, 255, 0.08);
@@ -229,7 +230,7 @@
             color: var(--white);
         }
         .lang-selector i {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         .lang-selector .arrow {
             font-size: 0.5rem;
@@ -247,7 +248,9 @@
             border: 1px solid #333;
             border-radius: 12px;
             padding: 6px 0;
-            min-width: 150px;
+            min-width: 170px;
+            max-height: 320px;
+            overflow-y: auto;
             opacity: 0;
             pointer-events: none;
             transform: translateY(-8px) scale(0.96);
@@ -255,6 +258,13 @@
             z-index: 100;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
+        }
+        .lang-dropdown::-webkit-scrollbar {
+            width: 4px;
+        }
+        .lang-dropdown::-webkit-scrollbar-thumb {
+            background: var(--primary-red);
+            border-radius: 10px;
         }
         .lang-dropdown.open {
             opacity: 1;
@@ -265,8 +275,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 16px;
-            font-size: 0.8rem;
+            padding: 7px 16px;
+            font-size: 0.75rem;
             color: var(--text-muted);
             transition: all 0.2s;
             border: none;
@@ -280,18 +290,18 @@
             color: var(--white);
         }
         .lang-dropdown a .flag {
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         .lang-dropdown a.active-lang {
             color: var(--primary-red);
             background: rgba(230, 57, 70, 0.05);
         }
 
-        /* ===== RIGHT SIDE GROUP (Language + Hamburger) ===== */
+        /* ===== RIGHT SIDE GROUP ===== */
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex-shrink: 0;
         }
 
@@ -304,60 +314,6 @@
             border: none;
             padding: 4px;
             flex-shrink: 0;
-        }
-
-        /* Mobile language selector (inside hamburger menu) */
-        .mobile-lang-section {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 8px 0;
-            border-bottom: 1px solid #1e1e1e;
-            margin-bottom: 4px;
-        }
-        .mobile-lang-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            padding: 4px 0;
-        }
-        .mobile-lang-header i {
-            color: var(--primary-red);
-            font-size: 1rem;
-        }
-        .mobile-lang-header .arrow {
-            margin-left: auto;
-            font-size: 0.6rem;
-            transition: transform 0.3s;
-        }
-        .mobile-lang-header.active .arrow {
-            transform: rotate(180deg);
-        }
-        .mobile-lang-options {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            padding-left: 30px;
-        }
-        .mobile-lang-options.open {
-            display: flex;
-        }
-        .mobile-lang-options a {
-            font-size: 0.85rem;
-            padding: 6px 0;
-            border-bottom: none;
-            color: var(--text-muted);
-            transition: color 0.2s;
-        }
-        .mobile-lang-options a:hover {
-            color: var(--primary-red);
-        }
-        .mobile-lang-options a.active-lang {
-            color: var(--primary-red);
         }
 
         /* ===== MOBILE NAV ===== */
@@ -374,14 +330,15 @@
             border-left: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
+            overflow-y: auto;
         }
         .mobile-nav.active {
             right: 0;
         }
         .mobile-nav a {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             padding: 10px 0;
             border-bottom: 1px solid #1e1e1e;
@@ -418,6 +375,69 @@
         .overlay.active {
             opacity: 1;
             pointer-events: auto;
+        }
+
+        /* Mobile Language Section */
+        .mobile-lang-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px 0;
+            border-bottom: 1px solid #1e1e1e;
+            margin-bottom: 4px;
+        }
+        .mobile-lang-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+        .mobile-lang-header i {
+            color: var(--primary-red);
+            font-size: 1rem;
+        }
+        .mobile-lang-header .arrow {
+            margin-left: auto;
+            font-size: 0.6rem;
+            transition: transform 0.3s;
+        }
+        .mobile-lang-header.active .arrow {
+            transform: rotate(180deg);
+        }
+        .mobile-lang-options {
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            padding-left: 30px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .mobile-lang-options.open {
+            display: flex;
+        }
+        .mobile-lang-options::-webkit-scrollbar {
+            width: 3px;
+        }
+        .mobile-lang-options::-webkit-scrollbar-thumb {
+            background: var(--primary-red);
+            border-radius: 10px;
+        }
+        .mobile-lang-options a {
+            font-size: 0.8rem;
+            padding: 5px 0;
+            border-bottom: none;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        .mobile-lang-options a:hover {
+            color: var(--primary-red);
+        }
+        .mobile-lang-options a.active-lang {
+            color: var(--primary-red);
         }
 
         /* ===== HERO ===== */
@@ -482,7 +502,7 @@
             font-size: 0.8rem;
         }
 
-        /* Hero Image - PROPERLY SIZED */
+        /* Hero Image - REDUCED SIZE FOR BETTER VISIBILITY */
         .hero-image-wrapper {
             display: flex;
             justify-content: center;
@@ -492,11 +512,11 @@
         }
         .hero-image-wrapper img {
             width: 100%;
-            max-width: 500px;
+            max-width: 380px;
             height: auto;
-            border-radius: 20px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.12), 0 0 80px rgba(230, 57, 70, 0.04);
+            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.1), 0 0 60px rgba(230, 57, 70, 0.03);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             object-fit: contain;
             display: block;
@@ -504,13 +524,13 @@
         }
         .hero-image-wrapper img:hover {
             transform: scale(1.02);
-            box-shadow: 0 30px 80px rgba(230, 57, 70, 0.18);
+            box-shadow: 0 30px 80px rgba(230, 57, 70, 0.15);
         }
         .hero-image-wrapper .glow-red-bg {
             position: absolute;
-            width: 70%;
-            height: 70%;
-            background: radial-gradient(circle, rgba(230, 57, 70, 0.08), transparent 70%);
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.06), transparent 70%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -579,8 +599,15 @@
         .pricing-card.recommended:hover {
             transform: scale(1.04) translateY(-4px);
         }
+        .pricing-card.popular {
+            border-color: #f39c12;
+            box-shadow: 0 0 30px rgba(243, 156, 18, 0.08);
+            transform: scale(1.02);
+        }
+        .pricing-card.popular:hover {
+            transform: scale(1.04) translateY(-4px);
+        }
         .badge {
-            background: var(--primary-red);
             color: #fff;
             padding: 3px 14px;
             border-radius: 30px;
@@ -590,6 +617,12 @@
             margin-bottom: 6px;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+        }
+        .badge-red {
+            background: var(--primary-red);
+        }
+        .badge-gold {
+            background: #f39c12;
         }
         .pricing-card h3 {
             font-size: 1.2rem;
@@ -1103,7 +1136,7 @@
                 font-size: 2.2rem;
             }
             .hero-image-wrapper img {
-                max-width: 420px;
+                max-width: 320px;
             }
             .pricing-card {
                 padding: 16px 12px;
@@ -1134,7 +1167,7 @@
                 order: -1;
             }
             .hero-image-wrapper img {
-                max-width: 480px;
+                max-width: 380px;
                 width: 100%;
             }
             .pricing-scroll {
@@ -1145,6 +1178,12 @@
                 transform: scale(1.02);
             }
             .pricing-card.recommended:hover {
+                transform: scale(1.04) translateY(-4px);
+            }
+            .pricing-card.popular {
+                transform: scale(1.02);
+            }
+            .pricing-card.popular:hover {
                 transform: scale(1.04) translateY(-4px);
             }
             .feature-grid {
@@ -1165,11 +1204,19 @@
             .hamburger {
                 display: block;
             }
-            /* Language selector stays in nav-right */
             .nav-right {
                 display: flex;
                 align-items: center;
                 gap: 6px;
+            }
+            .lang-selector {
+                max-width: 70px;
+                padding: 4px 8px;
+                font-size: 0.65rem;
+                min-height: 28px;
+            }
+            .lang-selector i {
+                font-size: 0.7rem;
             }
 
             .hero-content h1 {
@@ -1198,7 +1245,7 @@
             }
             .hero-image-wrapper img {
                 max-width: 100%;
-                border-radius: 16px;
+                border-radius: 14px;
             }
 
             .pricing-scroll {
@@ -1225,6 +1272,12 @@
                 transform: scale(1.02);
             }
             .pricing-card.recommended:hover {
+                transform: scale(1.04) translateY(-4px);
+            }
+            .pricing-card.popular {
+                transform: scale(1.02);
+            }
+            .pricing-card.popular:hover {
                 transform: scale(1.04) translateY(-4px);
             }
             .pricing-card h3 {
@@ -1374,6 +1427,7 @@
             }
             .hero-image-wrapper img {
                 border-radius: 12px;
+                max-width: 100%;
             }
 
             .pricing-card {
@@ -1540,6 +1594,20 @@
                 font-size: 2rem;
                 margin-bottom: 6px;
             }
+
+            .lang-dropdown {
+                min-width: 150px;
+                right: -20px;
+            }
+            .lang-selector {
+                max-width: 60px;
+                padding: 3px 6px;
+                font-size: 0.6rem;
+                min-height: 26px;
+            }
+            .lang-selector i {
+                font-size: 0.6rem;
+            }
         }
     </style>
 </head>
@@ -1565,9 +1633,19 @@
             </div>
             <div class="mobile-lang-options" id="mobileLangOptions">
                 <a href="#" data-lang="en" class="active-lang">🇬🇧 English</a>
-                <a href="#" data-lang="fr">🇫🇷 Français</a>
-                <a href="#" data-lang="es">🇪🇸 Español</a>
-                <a href="#" data-lang="pt">🇵🇹 Português</a>
+                <a href="#" data-lang="es">🇪🇸 Spanish</a>
+                <a href="#" data-lang="ur">🇵🇰 Urdu</a>
+                <a href="#" data-lang="romur">🇵🇰 Roman Urdu</a>
+                <a href="#" data-lang="fr">🇫🇷 French</a>
+                <a href="#" data-lang="sw">🇹🇿 Kiswahili</a>
+                <a href="#" data-lang="romne">🇳🇵 Roman Nepali</a>
+                <a href="#" data-lang="ne">🇳🇵 Nepali</a>
+                <a href="#" data-lang="de">🇩🇪 German</a>
+                <a href="#" data-lang="pt">🇵🇹 Portuguese</a>
+                <a href="#" data-lang="ptbr">🇧🇷 Brazilian</a>
+                <a href="#" data-lang="ar">🇸🇦 Arabic</a>
+                <a href="#" data-lang="hi">🇮🇳 Hindi</a>
+                <a href="#" data-lang="zh">🇨🇳 Chinese</a>
             </div>
         </div>
 
@@ -1597,18 +1675,20 @@
                     <span id="currentLangLabel">EN</span>
                     <span class="arrow">▼</span>
                     <div class="lang-dropdown" id="langDropdown">
-                        <a href="#" data-lang="en" class="active-lang">
-                            <span class="flag">🇬🇧</span> English
-                        </a>
-                        <a href="#" data-lang="fr">
-                            <span class="flag">🇫🇷</span> Français
-                        </a>
-                        <a href="#" data-lang="es">
-                            <span class="flag">🇪🇸</span> Español
-                        </a>
-                        <a href="#" data-lang="pt">
-                            <span class="flag">🇵🇹</span> Português
-                        </a>
+                        <a href="#" data-lang="en" class="active-lang"><span class="flag">🇬🇧</span> English</a>
+                        <a href="#" data-lang="es"><span class="flag">🇪🇸</span> Spanish</a>
+                        <a href="#" data-lang="ur"><span class="flag">🇵🇰</span> Urdu</a>
+                        <a href="#" data-lang="romur"><span class="flag">🇵🇰</span> Roman Urdu</a>
+                        <a href="#" data-lang="fr"><span class="flag">🇫🇷</span> French</a>
+                        <a href="#" data-lang="sw"><span class="flag">🇹🇿</span> Kiswahili</a>
+                        <a href="#" data-lang="romne"><span class="flag">🇳🇵</span> Roman Nepali</a>
+                        <a href="#" data-lang="ne"><span class="flag">🇳🇵</span> Nepali</a>
+                        <a href="#" data-lang="de"><span class="flag">🇩🇪</span> German</a>
+                        <a href="#" data-lang="pt"><span class="flag">🇵🇹</span> Portuguese</a>
+                        <a href="#" data-lang="ptbr"><span class="flag">🇧🇷</span> Brazilian</a>
+                        <a href="#" data-lang="ar"><span class="flag">🇸🇦</span> Arabic</a>
+                        <a href="#" data-lang="hi"><span class="flag">🇮🇳</span> Hindi</a>
+                        <a href="#" data-lang="zh"><span class="flag">🇨🇳</span> Chinese</a>
                     </div>
                 </div>
                 <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
@@ -1645,9 +1725,9 @@
         <div class="container">
             <h2 class="section-title">CHOOSE YOUR <span>PLAN</span></h2>
             <div class="pricing-scroll" id="pricingScroll">
-                <!-- Card 1 - HIGHLY RECOMMENDED -->
+                <!-- Card 1 - MOSTLY RECOMMENDED -->
                 <div class="pricing-card recommended reveal">
-                    <div class="badge">🔥 HIGHLY RECOMMENDED</div>
+                    <div class="badge badge-red">🔥 MOSTLY RECOMMENDED</div>
                     <h3>1 MONTH</h3>
                     <p class="duration">30 Days Access</p>
                     <div class="price">$19.00</div>
@@ -1659,9 +1739,9 @@
                     </ul>
                     <a href="#" class="btn-primary subscribe-trigger" data-plan="1 Month - $19.00">SUBSCRIBE NOW</a>
                 </div>
-                <!-- Card 2 -->
-                <div class="pricing-card reveal">
-                    <div class="badge" style="background:transparent;color:var(--text-muted);border:1px solid #333;">POPULAR</div>
+                <!-- Card 2 - MOSTLY RECOMMENDED -->
+                <div class="pricing-card recommended reveal">
+                    <div class="badge badge-red">🔥 MOSTLY RECOMMENDED</div>
                     <h3>3 MONTHS</h3>
                     <p class="duration">90 Days Access</p>
                     <div class="price">$49.00</div>
@@ -1673,8 +1753,9 @@
                     </ul>
                     <a href="#" class="btn-primary subscribe-trigger" data-plan="3 Months - $49.00">SUBSCRIBE NOW</a>
                 </div>
-                <!-- Card 3 -->
-                <div class="pricing-card reveal">
+                <!-- Card 3 - POPULAR -->
+                <div class="pricing-card popular reveal">
+                    <div class="badge badge-gold">⭐ POPULAR</div>
                     <h3>6 MONTHS</h3>
                     <p class="duration">180 Days Access</p>
                     <div class="price">$99.00</div>
@@ -1945,6 +2026,24 @@
             const popupPlanDesc = document.getElementById('popupPlanDesc');
             const whatsappLink = document.getElementById('whatsappLink');
 
+            // ---- Language Data ----
+            const languages = {
+                en: { name: 'English', flag: '🇬🇧', code: 'EN' },
+                es: { name: 'Spanish', flag: '🇪🇸', code: 'ES' },
+                ur: { name: 'Urdu', flag: '🇵🇰', code: 'UR' },
+                romur: { name: 'Roman Urdu', flag: '🇵🇰', code: 'ROM' },
+                fr: { name: 'French', flag: '🇫🇷', code: 'FR' },
+                sw: { name: 'Kiswahili', flag: '🇹🇿', code: 'SW' },
+                romne: { name: 'Roman Nepali', flag: '🇳🇵', code: 'ROMN' },
+                ne: { name: 'Nepali', flag: '🇳🇵', code: 'NE' },
+                de: { name: 'German', flag: '🇩🇪', code: 'DE' },
+                pt: { name: 'Portuguese', flag: '🇵🇹', code: 'PT' },
+                ptbr: { name: 'Brazilian', flag: '🇧🇷', code: 'PTB' },
+                ar: { name: 'Arabic', flag: '🇸🇦', code: 'AR' },
+                hi: { name: 'Hindi', flag: '🇮🇳', code: 'HI' },
+                zh: { name: 'Chinese', flag: '🇨🇳', code: 'ZH' }
+            };
+
             // ---- Language Selector (Desktop) ----
             const langSelector = document.getElementById('langSelector');
             const langDropdown = document.getElementById('langDropdown');
@@ -1957,24 +2056,531 @@
             const mobileLangLabel = document.getElementById('mobileLangLabel');
             const mobileLangLinks = mobileLangOptions.querySelectorAll('a');
 
-            const langNames = {
-                en: 'English',
-                fr: 'Français',
-                es: 'Español',
-                pt: 'Português'
+            // ---- Translation Data ----
+            const translations = {
+                en: {
+                    heroTitle: 'REAL-TIME <span>SIGNALS.</span><br />BET <span>SMARTER.</span>',
+                    heroDesc: 'Aviator Predictor provides real-time signals and useful game information to help users make their own decisions while they play.',
+                    subscribe: 'SUBSCRIBE NOW',
+                    howItWorks: 'HOW IT WORKS',
+                    features: {
+                        realtime: 'Real-Time Signals',
+                        easy: 'Easy-to-Use',
+                        mobile: 'Mobile Friendly',
+                        access: 'Subscription Access',
+                        tutorials: 'Tutorials',
+                        support: 'Support'
+                    },
+                    pricing: 'CHOOSE YOUR <span>PLAN</span>',
+                    months: 'MONTHS',
+                    days: 'Days Access',
+                    plan1: '1 MONTH',
+                    plan2: '3 MONTHS',
+                    plan3: '6 MONTHS',
+                    mostRecommended: '🔥 MOSTLY RECOMMENDED',
+                    popular: '⭐ POPULAR',
+                    cta: 'READY TO GET <span style="color:var(--primary-red);">STARTED?</span>',
+                    ctaDesc: 'Choose a subscription plan and get access to the Aviator Predictor application.',
+                    faq: 'FREQUENTLY ASKED <span>QUESTIONS</span>',
+                    contact: 'NEED <span>HELP?</span>',
+                    contactDesc: 'Our support team is available to assist you with subscription, installation, and application questions.',
+                    contactSupport: 'CONTACT SUPPORT',
+                    whatsappSupport: 'WHATSAPP SUPPORT',
+                    responsible: 'USE RESPONSIBLY',
+                    responsibleDesc: 'Aviator Predictor is an informational/software tool. It does not guarantee winnings or predict random game outcomes with certainty. Betting involves financial risk. Only participate where legally permitted and never risk money you cannot afford to lose.',
+                    footerDesc: 'Tools and information designed to provide users with a simple way to access their subscribed application.',
+                    quickLinks: 'QUICK LINKS',
+                    supportTitle: 'SUPPORT',
+                    legal: 'LEGAL',
+                    followUs: 'FOLLOW US',
+                    copyright: '© 2026 Aviator Predictor. All rights reserved.'
+                },
+                es: {
+                    heroTitle: 'SEÑALES EN <span>TIEMPO REAL.</span><br />APUESTA <span>MÁS INTELIGENTE.</span>',
+                    heroDesc: 'Aviator Predictor proporciona señales en tiempo real e información útil del juego para ayudar a los usuarios a tomar sus propias decisiones mientras juegan.',
+                    subscribe: 'SUSCRÍBETE AHORA',
+                    howItWorks: 'CÓMO FUNCIONA',
+                    features: {
+                        realtime: 'Señales en Tiempo Real',
+                        easy: 'Fácil de Usar',
+                        mobile: 'Compatibilidad Móvil',
+                        access: 'Acceso por Suscripción',
+                        tutorials: 'Tutoriales',
+                        support: 'Soporte'
+                    },
+                    pricing: 'ELIGE TU <span>PLAN</span>',
+                    months: 'MESES',
+                    days: 'Días de Acceso',
+                    plan1: '1 MES',
+                    plan2: '3 MESES',
+                    plan3: '6 MESES',
+                    mostRecommended: '🔥 ALTAMENTE RECOMENDADO',
+                    popular: '⭐ POPULAR',
+                    cta: '¿LISTO PARA <span style="color:var(--primary-red);">COMENZAR?</span>',
+                    ctaDesc: 'Elige un plan de suscripción y obtén acceso a la aplicación Aviator Predictor.',
+                    faq: 'PREGUNTAS <span>FRECUENTES</span>',
+                    contact: '¿NECESITAS <span>AYUDA?</span>',
+                    contactDesc: 'Nuestro equipo de soporte está disponible para ayudarte con suscripción, instalación y preguntas sobre la aplicación.',
+                    contactSupport: 'CONTACTAR SOPORTE',
+                    whatsappSupport: 'SOPORTE WHATSAPP',
+                    responsible: 'USA CON RESPONSABILIDAD',
+                    responsibleDesc: 'Aviator Predictor es una herramienta informativa/de software. No garantiza ganancias ni predice resultados aleatorios con certeza. Las apuestas implican riesgo financiero. Solo participa donde sea legalmente permitido y nunca arriesgues dinero que no puedas permitirte perder.',
+                    footerDesc: 'Herramientas e información diseñadas para proporcionar a los usuarios una forma sencilla de acceder a su aplicación suscrita.',
+                    quickLinks: 'ENLACES RÁPIDOS',
+                    supportTitle: 'SOPORTE',
+                    legal: 'LEGAL',
+                    followUs: 'SÍGUENOS',
+                    copyright: '© 2026 Aviator Predictor. Todos los derechos reservados.'
+                },
+                ur: {
+                    heroTitle: 'ریئل ٹائم <span>سگنلز۔</span><br />بیٹ <span>سمارٹر۔</span>',
+                    heroDesc: 'ایوی ایٹر پریڈیکٹر ریئل ٹائم سگنلز اور مفید گیم معلومات فراہم کرتا ہے تاکہ صارفین کھیلتے ہوئے اپنے فیصلے خود کر سکیں۔',
+                    subscribe: 'ابھی سبسکرائب کریں',
+                    howItWorks: 'کیسے کام کرتا ہے',
+                    features: {
+                        realtime: 'ریئل ٹائم سگنلز',
+                        easy: 'استعمال میں آسان',
+                        mobile: 'موبائل فرینڈلی',
+                        access: 'سبسکرپشن تک رسائی',
+                        tutorials: 'سبق',
+                        support: 'معاونت'
+                    },
+                    pricing: 'اپنا <span>پلان</span> منتخب کریں',
+                    months: 'ماہ',
+                    days: 'دنوں کی رسائی',
+                    plan1: '1 ماہ',
+                    plan2: '3 ماہ',
+                    plan3: '6 ماہ',
+                    mostRecommended: '🔥 انتہائی تجویز کردہ',
+                    popular: '⭐ مقبول',
+                    cta: 'شروع کرنے کے <span style="color:var(--primary-red);">لیے تیار ہیں؟</span>',
+                    ctaDesc: 'ایک سبسکرپشن پلان منتخب کریں اور ایوی ایٹر پریڈیکٹر ایپ تک رسائی حاصل کریں۔',
+                    faq: 'اکثر پوچھے گئے <span>سوالات</span>',
+                    contact: 'مدد <span>چاہیے؟</span>',
+                    contactDesc: 'ہماری سپورٹ ٹیم سبسکرپشن، انسٹالیشن اور ایپ سے متعلق سوالات میں آپ کی مدد کے لیے دستیاب ہے۔',
+                    contactSupport: 'سپورٹ سے رابطہ کریں',
+                    whatsappSupport: 'واٹس ایپ سپورٹ',
+                    responsible: 'ذمہ داری سے استعمال کریں',
+                    responsibleDesc: 'ایوی ایٹر پریڈیکٹر ایک معلوماتی/سافٹ ویئر ٹول ہے۔ یہ جیت کی ضمانت نہیں دیتا اور نہ ہی بے ترتیب گیم کے نتائج کی یقینی پیش گوئی کرتا ہے۔ بیٹنگ میں مالی خطرہ شامل ہے۔ صرف وہیں شرکت کریں جہاں قانونی طور پر اجازت ہو اور کبھی بھی وہ رقم خطرے میں نہ ڈالیں جو آپ کھونے کا متحمل نہیں ہو سکتے۔',
+                    footerDesc: 'صارفین کو ان کی سبسکرائب کردہ ایپ تک آسان رسائی فراہم کرنے کے لیے ڈیزائن کیے گئے ٹولز اور معلومات۔',
+                    quickLinks: 'فوری روابط',
+                    supportTitle: 'سپورٹ',
+                    legal: 'قانونی',
+                    followUs: 'ہمیں فالو کریں',
+                    copyright: '© 2026 ایوی ایٹر پریڈیکٹر۔ جملہ حقوق محفوظ ہیں۔'
+                },
+                fr: {
+                    heroTitle: 'SIGNAUX EN <span>TEMPS RÉEL.</span><br />PARIEZ <span>PLUS INTELLIGEMMENT.</span>',
+                    heroDesc: 'Aviator Predictor fournit des signaux en temps réel et des informations utiles sur le jeu pour aider les utilisateurs à prendre leurs propres décisions pendant qu\'ils jouent.',
+                    subscribe: 'S\'ABONNER MAINTENANT',
+                    howItWorks: 'COMMENT ÇA MARCHE',
+                    features: {
+                        realtime: 'Signaux en Temps Réel',
+                        easy: 'Facile à Utiliser',
+                        mobile: 'Compatible Mobile',
+                        access: 'Accès par Abonnement',
+                        tutorials: 'Tutoriels',
+                        support: 'Support'
+                    },
+                    pricing: 'CHOISISSEZ VOTRE <span>FORMULE</span>',
+                    months: 'MOIS',
+                    days: 'Jours d\'Accès',
+                    plan1: '1 MOIS',
+                    plan2: '3 MOIS',
+                    plan3: '6 MOIS',
+                    mostRecommended: '🔥 FORTEMENT RECOMMANDÉ',
+                    popular: '⭐ POPULAIRE',
+                    cta: 'PRÊT À <span style="color:var(--primary-red);">COMMENCER ?</span>',
+                    ctaDesc: 'Choisissez une formule d\'abonnement et accédez à l\'application Aviator Predictor.',
+                    faq: 'QUESTIONS <span>FRÉQUEMMENT POSÉES</span>',
+                    contact: 'BESOIN D\'<span>AIDE ?</span>',
+                    contactDesc: 'Notre équipe de support est disponible pour vous aider avec l\'abonnement, l\'installation et les questions sur l\'application.',
+                    contactSupport: 'CONTACTER LE SUPPORT',
+                    whatsappSupport: 'SUPPORT WHATSAPP',
+                    responsible: 'UTILISEZ DE MANIÈRE RESPONSABLE',
+                    responsibleDesc: 'Aviator Predictor est un outil informatique/d\'information. Il ne garantit pas les gains ni ne prédit les résultats aléatoires avec certitude. Les paris impliquent un risque financier. Participez uniquement là où c\'est légalement autorisé et ne risquez jamais d\'argent que vous ne pouvez pas vous permettre de perdre.',
+                    footerDesc: 'Des outils et des informations conçus pour offrir aux utilisateurs un moyen simple d\'accéder à leur application abonnée.',
+                    quickLinks: 'LIENS RAPIDES',
+                    supportTitle: 'SUPPORT',
+                    legal: 'LÉGAL',
+                    followUs: 'SUIVEZ-NOUS',
+                    copyright: '© 2026 Aviator Predictor. Tous droits réservés.'
+                },
+                sw: {
+                    heroTitle: 'ISHARA ZA <span>WAKATI HALISI.</span><br />BET <span>KWA AKILI ZAIDI.</span>',
+                    heroDesc: 'Aviator Predictor hutoa ishara za wakati halisi na taarifa muhimu za mchezo ili kuwasaidia watumiaji kufanya maamuzi yao wenyewe wanapocheza.',
+                    subscribe: 'JISAJILI SASA',
+                    howItWorks: 'INAVYOFANYA KAZI',
+                    features: {
+                        realtime: 'Ishara za Wakati Halisi',
+                        easy: 'Rahisi Kutumia',
+                        mobile: 'Inaendana na Simu',
+                        access: 'Ufikiaji wa Usajili',
+                        tutorials: 'Mafunzo',
+                        support: 'Msaada'
+                    },
+                    pricing: 'CHAGUA <span>MPANGO</span> WAKO',
+                    months: 'MIEZI',
+                    days: 'Siku za Ufikiaji',
+                    plan1: 'MWEZI 1',
+                    plan2: 'MIEZI 3',
+                    plan3: 'MIEZI 6',
+                    mostRecommended: '🔥 ILIYOPENDWA SANA',
+                    popular: '⭐ UMAARUFU',
+                    cta: 'UKO TAYARI <span style="color:var(--primary-red);">KUANZA?</span>',
+                    ctaDesc: 'Chagua mpango wa usajili na upate ufikiaji wa programu ya Aviator Predictor.',
+                    faq: 'MASWALI YANAYOULIZWA <span>MARANYINGI</span>',
+                    contact: 'UNAHITAJI <span>MSAADA?</span>',
+                    contactDesc: 'Timu yetu ya msaada inapatikana kukusaidia kwa maswali ya usajili, usakinishaji, na programu.',
+                    contactSupport: 'WASILIANA NA MSAADA',
+                    whatsappSupport: 'MSAADA WA WHATSAPP',
+                    responsible: 'TUMIA KWA WAJIBU',
+                    responsibleDesc: 'Aviator Predictor ni chombo cha habari/ programu. Haitoi dhamana ya kushinda au kutabiri matokeo ya bahati nasibu kwa uhakika. Kubeti kunahusisha hatari ya kifedha. Shiriki tu pale inaruhusiwa kisheria na usiweke kamwe pesa usiyoweza kumudu kupoteza.',
+                    footerDesc: 'Zana na taarifa zilizoundwa kuwapa watumiaji njia rahisi ya kufikia programu yao iliyosajiliwa.',
+                    quickLinks: 'VIUNGO VYA HARAKA',
+                    supportTitle: 'MSAADA',
+                    legal: 'SHERIA',
+                    followUs: 'TUFUATE',
+                    copyright: '© 2026 Aviator Predictor. Haki zote zimehifadhiwa.'
+                },
+                de: {
+                    heroTitle: 'ECHTZEIT-<span>SIGNALE.</span><br />WETTE <span>INTELLIGENTER.</span>',
+                    heroDesc: 'Aviator Predictor bietet Echtzeit-Signale und nützliche Spielinformationen, um Benutzern zu helfen, ihre eigenen Entscheidungen während des Spiels zu treffen.',
+                    subscribe: 'JETZT ABONNIEREN',
+                    howItWorks: 'SO FUNKTIONIERT\'S',
+                    features: {
+                        realtime: 'Echtzeit-Signale',
+                        easy: 'Benutzerfreundlich',
+                        mobile: 'Handyfreundlich',
+                        access: 'Abonnement-Zugang',
+                        tutorials: 'Anleitungen',
+                        support: 'Support'
+                    },
+                    pricing: 'WÄHLE DEINEN <span>PLAN</span>',
+                    months: 'MONATE',
+                    days: 'Tage Zugang',
+                    plan1: '1 MONAT',
+                    plan2: '3 MONATE',
+                    plan3: '6 MONATE',
+                    mostRecommended: '🔥 SEHR EMPFOHLEN',
+                    popular: '⭐ BELIEBT',
+                    cta: 'BEREIT ZU <span style="color:var(--primary-red);">STARTEN?</span>',
+                    ctaDesc: 'Wähle einen Abonnement-Plan und erhalte Zugang zur Aviator Predictor-App.',
+                    faq: 'HÄUFIG GESTELLTE <span>FRAGEN</span>',
+                    contact: 'BRAUCHST DU <span>HILFE?</span>',
+                    contactDesc: 'Unser Support-Team steht dir bei Fragen zu Abonnement, Installation und der App zur Verfügung.',
+                    contactSupport: 'SUPPORT KONTAKTIEREN',
+                    whatsappSupport: 'WHATSAPP-SUPPORT',
+                    responsible: 'VERANTWORTUNGSVOLL NUTZEN',
+                    responsibleDesc: 'Aviator Predictor ist ein Informations-/Software-Tool. Es garantiert keine Gewinne und sagt zufällige Spielergebnisse nicht mit Sicherheit voraus. Wetten beinhalten finanzielle Risiken. Nimm nur teil, wo es gesetzlich erlaubt ist, und setze niemals Geld, das du dir nicht leisten kannst zu verlieren.',
+                    footerDesc: 'Tools und Informationen, die Benutzern einen einfachen Zugang zu ihrer abonnierten App bieten.',
+                    quickLinks: 'SCHNELLLINKS',
+                    supportTitle: 'SUPPORT',
+                    legal: 'RECHTLICHES',
+                    followUs: 'FOLGE UNS',
+                    copyright: '© 2026 Aviator Predictor. Alle Rechte vorbehalten.'
+                },
+                pt: {
+                    heroTitle: 'SINAIS EM <span>TEMPO REAL.</span><br />APOSTE <span>COM MAIS INTELIGÊNCIA.</span>',
+                    heroDesc: 'O Aviator Predictor fornece sinais em tempo real e informações úteis sobre o jogo para ajudar os usuários a tomar suas próprias decisões enquanto jogam.',
+                    subscribe: 'INSCREVER-SE AGORA',
+                    howItWorks: 'COMO FUNCIONA',
+                    features: {
+                        realtime: 'Sinais em Tempo Real',
+                        easy: 'Fácil de Usar',
+                        mobile: 'Compatível com Celular',
+                        access: 'Acesso por Assinatura',
+                        tutorials: 'Tutoriais',
+                        support: 'Suporte'
+                    },
+                    pricing: 'ESCOLHA O SEU <span>PLANO</span>',
+                    months: 'MESES',
+                    days: 'Dias de Acesso',
+                    plan1: '1 MÊS',
+                    plan2: '3 MESES',
+                    plan3: '6 MESES',
+                    mostRecommended: '🔥 ALTAMENTE RECOMENDADO',
+                    popular: '⭐ POPULAR',
+                    cta: 'PRONTO PARA <span style="color:var(--primary-red);">COMEÇAR?</span>',
+                    ctaDesc: 'Escolha um plano de assinatura e obtenha acesso ao aplicativo Aviator Predictor.',
+                    faq: 'PERGUNTAS <span>FREQUENTES</span>',
+                    contact: 'PRECISA DE <span>AJUDA?</span>',
+                    contactDesc: 'Nossa equipe de suporte está disponível para ajudá-lo com assinatura, instalação e dúvidas sobre o aplicativo.',
+                    contactSupport: 'CONTATAR SUPORTE',
+                    whatsappSupport: 'SUPORTE WHATSAPP',
+                    responsible: 'USE COM RESPONSABILIDADE',
+                    responsibleDesc: 'O Aviator Predictor é uma ferramenta informativa/de software. Não garante ganhos nem prevê resultados aleatórios com certeza. As apostas envolvem risco financeiro. Participe apenas onde for legalmente permitido e nunca arrisque dinheiro que você não possa perder.',
+                    footerDesc: 'Ferramentas e informações projetadas para fornecer aos usuários uma maneira simples de acessar seu aplicativo assinado.',
+                    quickLinks: 'LINKS RÁPIDOS',
+                    supportTitle: 'SUPORTE',
+                    legal: 'LEGAL',
+                    followUs: 'SIGA-NOS',
+                    copyright: '© 2026 Aviator Predictor. Todos os direitos reservados.'
+                },
+                ptbr: {
+                    heroTitle: 'SINAIS EM <span>TEMPO REAL.</span><br />APOSTE <span>COM MAIS INTELIGÊNCIA.</span>',
+                    heroDesc: 'O Aviator Predictor fornece sinais em tempo real e informações úteis sobre o jogo para ajudar os usuários a tomar suas próprias decisões enquanto jogam.',
+                    subscribe: 'INSCREVER-SE AGORA',
+                    howItWorks: 'COMO FUNCIONA',
+                    features: {
+                        realtime: 'Sinais em Tempo Real',
+                        easy: 'Fácil de Usar',
+                        mobile: 'Compatível com Celular',
+                        access: 'Acesso por Assinatura',
+                        tutorials: 'Tutoriais',
+                        support: 'Suporte'
+                    },
+                    pricing: 'ESCOLHA O SEU <span>PLANO</span>',
+                    months: 'MESES',
+                    days: 'Dias de Acesso',
+                    plan1: '1 MÊS',
+                    plan2: '3 MESES',
+                    plan3: '6 MESES',
+                    mostRecommended: '🔥 ALTAMENTE RECOMENDADO',
+                    popular: '⭐ POPULAR',
+                    cta: 'PRONTO PARA <span style="color:var(--primary-red);">COMEÇAR?</span>',
+                    ctaDesc: 'Escolha um plano de assinatura e obtenha acesso ao aplicativo Aviator Predictor.',
+                    faq: 'PERGUNTAS <span>FREQUENTES</span>',
+                    contact: 'PRECISA DE <span>AJUDA?</span>',
+                    contactDesc: 'Nossa equipe de suporte está disponível para ajudá-lo com assinatura, instalação e dúvidas sobre o aplicativo.',
+                    contactSupport: 'CONTATAR SUPORTE',
+                    whatsappSupport: 'SUPORTE WHATSAPP',
+                    responsible: 'USE COM RESPONSABILIDADE',
+                    responsibleDesc: 'O Aviator Predictor é uma ferramenta informativa/de software. Não garante ganhos nem prevê resultados aleatórios com certeza. As apostas envolvem risco financeiro. Participe apenas onde for legalmente permitido e nunca arrisque dinheiro que você não possa perder.',
+                    footerDesc: 'Ferramentas e informações projetadas para fornecer aos usuários uma maneira simples de acessar seu aplicativo assinado.',
+                    quickLinks: 'LINKS RÁPIDOS',
+                    supportTitle: 'SUPORTE',
+                    legal: 'LEGAL',
+                    followUs: 'SIGA-NOS',
+                    copyright: '© 2026 Aviator Predictor. Todos os direitos reservados.'
+                },
+                ar: {
+                    heroTitle: 'إشارات <span>في الوقت الحقيقي.</span><br />راهن <span>بذكاء أكبر.</span>',
+                    heroDesc: 'يوفر Aviator Predictor إشارات في الوقت الحقيقي ومعلومات مفيدة عن اللعبة لمساعدة المستخدمين على اتخاذ قراراتهم الخاصة أثناء اللعب.',
+                    subscribe: 'اشترك الآن',
+                    howItWorks: 'كيف يعمل',
+                    features: {
+                        realtime: 'إشارات في الوقت الحقيقي',
+                        easy: 'سهل الاستخدام',
+                        mobile: 'متوافق مع الجوال',
+                        access: 'وصول عن طريق الاشتراك',
+                        tutorials: 'دروس تعليمية',
+                        support: 'الدعم'
+                    },
+                    pricing: 'اختر <span>خطتك</span>',
+                    months: 'شهور',
+                    days: 'يوم وصول',
+                    plan1: 'شهر واحد',
+                    plan2: '3 أشهر',
+                    plan3: '6 أشهر',
+                    mostRecommended: '🔥 موصى به للغاية',
+                    popular: '⭐ شائع',
+                    cta: 'هل أنت مستعد <span style="color:var(--primary-red);">للبدء؟</span>',
+                    ctaDesc: 'اختر خطة اشتراك واحصل على الوصول إلى تطبيق Aviator Predictor.',
+                    faq: 'الأسئلة <span>الشائعة</span>',
+                    contact: 'هل تحتاج <span>مساعدة؟</span>',
+                    contactDesc: 'فريق الدعم لدينا متاح لمساعدتك في الاشتراك والتركيب وأسئلة التطبيق.',
+                    contactSupport: 'اتصل بالدعم',
+                    whatsappSupport: 'دعم واتساب',
+                    responsible: 'استخدم بمسؤولية',
+                    responsibleDesc: 'Aviator Predictor هو أداة معلوماتية/برمجية. لا يضمن المكاسب ولا يتوقع نتائج اللعبة العشوائية بشكل مؤكد. المراهنة تنطوي على مخاطر مالية. شارك فقط حيث يسمح القانون ولا تخاطر مطلقًا بأموال لا يمكنك تحمل خسارتها.',
+                    footerDesc: 'أدوات ومعلومات مصممة لتزويد المستخدمين بطريقة بسيطة للوصول إلى تطبيقهم المشترك.',
+                    quickLinks: 'روابط سريعة',
+                    supportTitle: 'الدعم',
+                    legal: 'قانوني',
+                    followUs: 'تابعنا',
+                    copyright: '© 2026 Aviator Predictor. جميع الحقوق محفوظة.'
+                },
+                hi: {
+                    heroTitle: 'रीयल-टाइम <span>सिग्नल.</span><br />समझदारी से <span>दांव लगाएं.</span>',
+                    heroDesc: 'Aviator Predictor खेलते समय उपयोगकर्ताओं को उनके अपने निर्णय लेने में मदद करने के लिए रीयल-टाइम सिग्नल और उपयोगी गेम जानकारी प्रदान करता है।',
+                    subscribe: 'अभी सदस्यता लें',
+                    howItWorks: 'यह कैसे काम करता है',
+                    features: {
+                        realtime: 'रीयल-टाइम सिग्नल',
+                        easy: 'उपयोग में आसान',
+                        mobile: 'मोबाइल अनुकूल',
+                        access: 'सदस्यता पहुंच',
+                        tutorials: 'ट्यूटोरियल',
+                        support: 'सहायता'
+                    },
+                    pricing: 'अपनी <span>योजना</span> चुनें',
+                    months: 'महीने',
+                    days: 'दिनों की पहुंच',
+                    plan1: '1 महीना',
+                    plan2: '3 महीने',
+                    plan3: '6 महीने',
+                    mostRecommended: '🔥 अत्यधिक अनुशंसित',
+                    popular: '⭐ लोकप्रिय',
+                    cta: 'शुरू करने के <span style="color:var(--primary-red);">लिए तैयार हैं?</span>',
+                    ctaDesc: 'एक सदस्यता योजना चुनें और Aviator Predictor एप्लिकेशन तक पहुंच प्राप्त करें।',
+                    faq: 'अक्सर पूछे जाने वाले <span>प्रश्न</span>',
+                    contact: 'सहायता <span>चाहिए?</span>',
+                    contactDesc: 'हमारी सहायता टीम सदस्यता, स्थापना और ऐप प्रश्नों में आपकी सहायता के लिए उपलब्ध है।',
+                    contactSupport: 'सहायता से संपर्क करें',
+                    whatsappSupport: 'व्हाट्सएप सहायता',
+                    responsible: 'जिम्मेदारी से उपयोग करें',
+                    responsibleDesc: 'Aviator Predictor एक सूचनात्मक/सॉफ्टवेयर उपकरण है। यह जीत की गारंटी नहीं देता है और न ही यादृच्छिक गेम परिणामों की निश्चितता के साथ भविष्यवाणी करता है। सट्टेबाजी में वित्तीय जोखिम शामिल है। केवल वहीं भाग लें जहां कानूनी रूप से अनुमति हो और कभी भी वह पैसा जोखिम में न डालें जिसे खोना आप वहन नहीं कर सकते।',
+                    footerDesc: 'उपयोगकर्ताओं को उनकी सदस्यता वाले एप्लिकेशन तक पहुंचने का एक सरल तरीका प्रदान करने के लिए डिज़ाइन किए गए उपकरण और जानकारी।',
+                    quickLinks: 'त्वरित लिंक',
+                    supportTitle: 'सहायता',
+                    legal: 'कानूनी',
+                    followUs: 'हमें फॉलो करें',
+                    copyright: '© 2026 Aviator Predictor. सभी अधिकार सुरक्षित।'
+                },
+                zh: {
+                    heroTitle: '实时<span>信号。</span><br />更<span>明智</span>下注。',
+                    heroDesc: 'Aviator Predictor 提供实时信号和有用的游戏信息，帮助用户在玩游戏时做出自己的决定。',
+                    subscribe: '立即订阅',
+                    howItWorks: '工作原理',
+                    features: {
+                        realtime: '实时信号',
+                        easy: '易于使用',
+                        mobile: '移动友好',
+                        access: '订阅访问',
+                        tutorials: '教程',
+                        support: '支持'
+                    },
+                    pricing: '选择您的<span>计划</span>',
+                    months: '个月',
+                    days: '天访问',
+                    plan1: '1个月',
+                    plan2: '3个月',
+                    plan3: '6个月',
+                    mostRecommended: '🔥 强烈推荐',
+                    popular: '⭐ 热门',
+                    cta: '准备好<span style="color:var(--primary-red);">开始了吗？</span>',
+                    ctaDesc: '选择订阅计划并获取 Aviator Predictor 应用程序的访问权限。',
+                    faq: '常见<span>问题</span>',
+                    contact: '需要<span>帮助？</span>',
+                    contactDesc: '我们的支持团队随时为您提供订阅、安装和应用程序问题的帮助。',
+                    contactSupport: '联系支持',
+                    whatsappSupport: 'WhatsApp 支持',
+                    responsible: '负责任地使用',
+                    responsibleDesc: 'Aviator Predictor 是一个信息/软件工具。它不保证赢利，也不确定地预测随机游戏结果。投注涉及财务风险。仅在法律允许的地方参与，切勿冒险投入您无法承受损失的资金。',
+                    footerDesc: '旨在为用户提供一种简单的方式来访问他们订阅的应用程序的工具和信息。',
+                    quickLinks: '快速链接',
+                    supportTitle: '支持',
+                    legal: '法律',
+                    followUs: '关注我们',
+                    copyright: '© 2026 Aviator Predictor。保留所有权利。'
+                }
             };
 
+            // ---- Current language ----
+            let currentLang = 'en';
+
+            // ---- Function to apply translations ----
+            function applyTranslations(lang) {
+                const t = translations[lang];
+                if (!t) return;
+
+                // Hero
+                document.querySelector('.hero-content h1').innerHTML = t.heroTitle;
+                document.querySelector('.hero-content .sub-headline').textContent = t.heroDesc;
+                document.querySelectorAll('.hero-buttons .btn-primary')[0].innerHTML = '<i class="fas fa-rocket" style="margin-right:6px;"></i> ' + t
+                    .subscribe;
+                document.querySelectorAll('.hero-buttons .btn-secondary')[0].innerHTML = '<i class="fas fa-play" style="margin-right:6px;"></i> ' +
+                    t.howItWorks;
+
+                // Features
+                const featureTitles = document.querySelectorAll('.feature-card h3');
+                const featureDescs = document.querySelectorAll('.feature-card p');
+                const featureKeys = ['realtime', 'easy', 'mobile', 'access', 'tutorials', 'support'];
+                featureTitles.forEach((el, i) => {
+                    if (i < featureKeys.length) el.textContent = t.features[featureKeys[i]];
+                });
+
+                // Pricing
+                document.querySelector('#pricing .section-title').innerHTML = t.pricing;
+                const planTitles = document.querySelectorAll('.pricing-card h3');
+                const planDurations = document.querySelectorAll('.pricing-card .duration');
+                const badges = document.querySelectorAll('.pricing-card .badge');
+                if (planTitles.length >= 3) {
+                    planTitles[0].textContent = t.plan1;
+                    planTitles[1].textContent = t.plan2;
+                    planTitles[2].textContent = t.plan3;
+                }
+                if (planDurations.length >= 3) {
+                    planDurations[0].textContent = '30 ' + t.days;
+                    planDurations[1].textContent = '90 ' + t.days;
+                    planDurations[2].textContent = '180 ' + t.days;
+                }
+                if (badges.length >= 3) {
+                    badges[0].textContent = t.mostRecommended;
+                    badges[1].textContent = t.mostRecommended;
+                    badges[2].textContent = t.popular;
+                }
+
+                // CTA
+                document.querySelector('#cta h2').innerHTML = t.cta;
+                document.querySelector('#cta p').textContent = t.ctaDesc;
+                document.querySelector('#cta .btn-primary').innerHTML = '<i class="fas fa-arrow-right" style="margin-right:8px;"></i> ' + t
+                    .subscribe;
+
+                // FAQ
+                document.querySelector('#faq .section-title').innerHTML = t.faq;
+
+                // Contact
+                document.querySelector('#contact .section-title').innerHTML = t.contact;
+                document.querySelector('#contact p').textContent = t.contactDesc;
+                const contactBtns = document.querySelectorAll('#contact .buttons a');
+                if (contactBtns.length >= 2) {
+                    contactBtns[0].innerHTML = '<i class="fas fa-envelope" style="margin-right:8px;"></i> ' + t.contactSupport;
+                    contactBtns[1].innerHTML = '<i class="fab fa-whatsapp" style="margin-right:8px;"></i> ' + t.whatsappSupport;
+                }
+
+                // Responsible
+                document.querySelector('#responsible h3').innerHTML = '<i class="fas fa-exclamation-triangle" style="margin-right:8px;"></i> ' +
+                    t.responsible;
+                document.querySelector('#responsible p').textContent = t.responsibleDesc;
+
+                // Footer
+                const footerDesc = document.querySelector('.footer-col p');
+                if (footerDesc) footerDesc.textContent = t.footerDesc;
+                const footerHeadings = document.querySelectorAll('.footer-col h4');
+                if (footerHeadings.length >= 3) {
+                    footerHeadings[0].textContent = t.quickLinks;
+                    footerHeadings[1].textContent = t.supportTitle;
+                    footerHeadings[2].textContent = t.legal;
+                }
+                const footerBottom = document.querySelector('.footer-bottom');
+                if (footerBottom) footerBottom.textContent = t.copyright;
+
+                // Nav subscribe button
+                document.querySelectorAll('.nav-links .btn-primary, .mobile-nav .btn-primary').forEach(el => {
+                    if (el.textContent.trim() === 'SUBSCRIBE' || el.textContent.trim() === 'SUBSCRIBE NOW' || el.textContent
+                        .trim() === 'SUBSCRIBE') {
+                        el.textContent = t.subscribe;
+                    }
+                });
+
+                // Update subscribe triggers text
+                document.querySelectorAll('.subscribe-trigger:not(.btn-primary)').forEach(el => {
+                    if (el.textContent.trim() === 'SUBSCRIBE NOW' || el.textContent.trim() === 'SUBSCRIBE') {
+                        el.textContent = t.subscribe;
+                    }
+                });
+
+                // Update "MOSTLY RECOMMENDED" and "POPULAR" badges in pricing
+                // (already handled above)
+            }
+
+            // ---- Function to set language ----
             function setLanguage(lang, optionElement) {
-                const label = langNames[lang] || lang.toUpperCase();
+                const langData = languages[lang];
+                if (!langData) return;
+
+                currentLang = lang;
 
                 // Update desktop
-                currentLangLabel.textContent = lang.toUpperCase();
+                currentLangLabel.textContent = langData.code;
                 langOptions.forEach(opt => opt.classList.remove('active-lang'));
                 const desktopOption = Array.from(langOptions).find(opt => opt.getAttribute('data-lang') === lang);
                 if (desktopOption) desktopOption.classList.add('active-lang');
 
                 // Update mobile
-                mobileLangLabel.textContent = label;
+                mobileLangLabel.textContent = langData.name;
                 mobileLangLinks.forEach(link => {
                     link.classList.remove('active-lang');
                     if (link.getAttribute('data-lang') === lang) {
@@ -1982,30 +2588,35 @@
                     }
                 });
 
+                // Apply translations
+                applyTranslations(lang);
+
                 // Close dropdowns
                 langSelector.classList.remove('active');
                 langDropdown.classList.remove('open');
                 mobileLangOptions.classList.remove('open');
+                mobileLangHeader.classList.remove('active');
 
-                showNotification('🌐 Language changed to ' + label);
-                console.log('Language changed to:', lang);
+                // Show notification
+                showNotification('🌐 Language changed to ' + langData.name);
+                console.log('Language changed to:', lang, langData.name);
             }
 
-            // Desktop toggle
+            // ---- Desktop toggle ----
             langSelector.addEventListener('click', function(e) {
                 e.stopPropagation();
                 this.classList.toggle('active');
                 langDropdown.classList.toggle('open');
             });
 
-            // Mobile toggle
+            // ---- Mobile toggle ----
             mobileLangHeader.addEventListener('click', function(e) {
                 e.stopPropagation();
                 this.classList.toggle('active');
                 mobileLangOptions.classList.toggle('open');
             });
 
-            // Desktop language selection
+            // ---- Desktop language selection ----
             langOptions.forEach(option => {
                 option.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -2015,7 +2626,7 @@
                 });
             });
 
-            // Mobile language selection
+            // ---- Mobile language selection ----
             mobileLangLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -2027,7 +2638,7 @@
                 });
             });
 
-            // Close dropdowns when clicking outside
+            // ---- Close dropdowns when clicking outside ----
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.lang-selector')) {
                     langSelector.classList.remove('active');
@@ -2039,6 +2650,7 @@
                 }
             });
 
+            // ---- Notification helper ----
             function showNotification(message) {
                 const notification = document.createElement('div');
                 notification.style.cssText = `
@@ -2190,9 +2802,10 @@
                 });
             });
 
-            console.log('✅ Aviator Predictor — fully fixed with visible language selector and proper image sizing.');
-            console.log('🌐 Language selector is now near the hamburger menu on mobile.');
-            console.log('📸 Hero image properly sized and visible.');
+            console.log('✅ Aviator Predictor — fully loaded with 14 languages and responsive translations.');
+            console.log('🌐 Languages available: English, Spanish, Urdu, Roman Urdu, French, Kiswahili, Roman Nepali, Nepali, German, Portuguese, Brazilian, Arabic, Hindi, Chinese');
+            console.log('📸 Hero image reduced and properly sized for better visibility.');
+            console.log('💰 Pricing: $19.00 (Mostly Recommended), $49.00 (Mostly Recommended), $99.00 (Popular)');
         })();
     </script>
 </body>
